@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<control xmlns:def="Definition" xmlns="http://schemas.sitecore.net/Visual-Studio-Intellisense">
+  <RebuildSearchIndex>
+    <WizardForm Application="Search/RebuildSearchIndex" CodeBeside="scSearchContrib.Tools.RebuildSearchIndexForm, scSearchContrib.Tools">
+
+      <WizardFormFirstPage ID="FirstPage" Icon="Applications/32x32/find.png">
+        <Border Class="scWizardWelcomeTitle"><Literal Text="Welcome to the Rebuild Search Index Wizard."/></Border>
+        <Literal Text="This wizard helps you:"/>
+        <ul>
+          <li class="scWizardBullet"><Literal Text="Select a search index."/></li>
+          <li class="scWizardBullet"><Literal Text="Rebuild the search index."/></li>
+        </ul>
+      </WizardFormFirstPage>
+      
+      <WizardFormPage ID="Database" Header="Select Search Index" Text="Select the search index that you want to rebuild. You can rebuild more than one index at a time. Click Rebuild to rebuild the search index." Icon="Applications/32x32/find.png">
+        <WizardFormPadding>
+          <Scrollbox Border="none" Background="transparent">
+
+            <Groupbox Header="Rebuild Search Index" Margin="0px 0px 16px 0px">
+              <Border ID="Indexes" Padding="4px">
+              </Border>
+            </Groupbox>
+
+          </Scrollbox>
+        </WizardFormPadding>
+      </WizardFormPage>
+    
+      <WizardFormPage ID="Rebuilding" Header="Rebuilding" Text="Please wait while rebuilding..." Icon="Applications/32x32/find.png">
+        <GridPanel Width="100%">
+
+          <Space Height="64"/>
+
+          <ThemedImage Src="Applications/48x48/find.png" Width="48" Height="48" GridPanel.Align="center"/>
+
+          <Space Height="16"/>
+
+          <Border Align="center">
+            <ThemedImage Src="Images/progress.gif" Width="94" Height="17"/>
+          </Border>
+
+          <Space Height="16"/>
+
+          <Border ID="Text" Align="center" GridPanel.Align="center" GridPanel.Style="font-weight:bold">
+            <Literal Text="Rebuilding..."/>
+          </Border>
+          <Space Height="16"/>
+          <Border ID="Status" Align="center" GridPanel.Align="center">
+            &#160;
+          </Border>
+
+        </GridPanel>
+      </WizardFormPage>
+
+      <WizardFormPage ID="Retry" Header="Error" Text="An error occurred while rebuilding the search index." Icon="Applications/32x32/find.png">
+        <WizardFormPadding>
+          <GridPanel Width="100%" Height="100%" Fixed="true">
+            <Memo ID="ErrorText" ReadOnly="true" Width="100%" Height="100%"/>
+          </GridPanel>
+        </WizardFormPadding>
+      </WizardFormPage>
+
+      <WizardFormLastPage ID="LastPage" Icon="Applications/32x32/find.png">
+        <GridPanel Cellpadding="2" Width="100%" Height="100%" Fixed="true">
+
+          <Border GridPanel.Style="padding:0px 0px 16px 0px; font-weight:bold">
+            <Literal Text="The wizard has completed. Click Finish to close the wizard."/>
+          </Border>
+
+          <Border GridPanel.Style="padding:0px 0px 2px 0px">
+            <Literal Text="Result:"/>
+          </Border>
+
+          <Memo ID="ResultText" ReadOnly="true" Width="100%" Height="100%" GridPanel.Height="100%"/>
+
+        </GridPanel>
+      </WizardFormLastPage>
+      
+    </WizardForm>
+  </RebuildSearchIndex>
+</control>

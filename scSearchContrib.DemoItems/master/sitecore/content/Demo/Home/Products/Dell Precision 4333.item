@@ -1,0 +1,114 @@
+----item----
+version: 1
+id: {DD556099-B2FF-4998-832B-8933546F2F9D}
+database: master
+path: /sitecore/content/Demo/Home/Products/Dell Precision 4333
+parent: {37CDA3AB-7CE0-46E4-9B29-B918FD2E4E56}
+name: Dell Precision 4333
+master: {00000000-0000-0000-0000-000000000000}
+template: {3FE46250-BF73-47A2-A4EE-F6CD534B5E98}
+templatekey: Product
+
+----version----
+language: en
+version: 1
+revision: 39159cce-0539-45b6-82dd-c28b4d378f6c
+
+----field----
+field: {01C3535C-919E-4FE4-A014-D08780FF63E0}
+name: Name
+key: name
+content-length: 19
+
+Dell Precision 4333
+----field----
+field: {0177A6FB-35B0-4042-89B4-E050632A8166}
+name: SKU
+key: sku
+content-length: 6
+
+DEL235
+----field----
+field: {8AD7039E-16B5-4333-845A-AB7D756A830F}
+name: Price
+key: price
+content-length: 3
+
+795
+----field----
+field: {B3CCFB27-1DA4-426B-8928-A6136D7A6944}
+name: Availability
+key: availability
+content-length: 2
+
+55
+----field----
+field: {A1B9F101-8C24-4C67-823D-68526FBFBD66}
+name: Brand
+key: brand
+content-length: 38
+
+{D4AA711A-BD4F-43DB-A5BC-564B3D602412}
+----field----
+field: {EA408CEA-52F2-4999-A8F1-DD8CA838B0DE}
+name: Market
+key: market
+content-length: 155
+
+{116E61A3-BBE6-42DA-A3AB-A571E37A7D69}|{50090689-AD6F-4978-9CBA-C620F4A14269}|{12AFFD9A-611F-400E-8981-3DE800B4FF5E}|{CDEEFFE0-34D1-4584-AB17-4AE7F3F117BA}
+----field----
+field: {D8B1A83A-1597-4694-BE08-24EF59A4F1C5}
+name: RelatedProducts
+key: relatedproducts
+content-length: 38
+
+{1C7CC99E-EB12-4293-A52D-FA918938CB31}
+----field----
+field: {76A5613E-B4D5-4E96-9F9F-821BA016C26E}
+name: Created
+key: created
+content-length: 15
+
+20110312T160300
+----field----
+field: {198038A2-ECC9-4A76-A6D9-FA3D7A38B77A}
+name: Released
+key: released
+content-length: 15
+
+20110412T160300
+----field----
+field: {035CBBE5-6C49-402B-B884-080783C3F9EB}
+name: Country
+key: country
+content-length: 38
+
+{4FA09B11-A6D2-4301-B6C0-968CCA8C692F}
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20110812T160329
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+39159cce-0539-45b6-82dd-c28b4d378f6c
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20111201T175426:634583588661516643
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

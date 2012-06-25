@@ -1,0 +1,72 @@
+----item----
+version: 1
+id: {7E9AE464-47C8-45EF-B333-B2AD410CA714}
+database: master
+path: /sitecore/templates/scSearch Samples/Product/__Standard Values
+parent: {3FE46250-BF73-47A2-A4EE-F6CD534B5E98}
+name: __Standard Values
+master: {00000000-0000-0000-0000-000000000000}
+template: {3FE46250-BF73-47A2-A4EE-F6CD534B5E98}
+templatekey: Product
+
+----version----
+language: en
+version: 1
+revision: bf963fbc-ff70-4ba6-b2b4-700a3f12960b
+
+----field----
+field: {76A5613E-B4D5-4E96-9F9F-821BA016C26E}
+name: Created
+key: created
+content-length: 4
+
+$now
+----field----
+field: {198038A2-ECC9-4A76-A6D9-FA3D7A38B77A}
+name: Released
+key: released
+content-length: 4
+
+$now
+----field----
+field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
+name: __Owner
+key: __owner
+content-length: 14
+
+sitecore\admin
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20110812T155941
+----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 14
+
+sitecore\admin
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+bf963fbc-ff70-4ba6-b2b4-700a3f12960b
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20110812T160208:634487617280285934
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

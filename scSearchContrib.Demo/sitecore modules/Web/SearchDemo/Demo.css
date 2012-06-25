@@ -1,0 +1,40 @@
+﻿body
+{
+    font-family: Consolas;
+}
+
+#settings
+{
+    width: 450px;
+    float: left;
+}
+
+.ResultPanel
+{
+    font-size: 12px;
+    width: 600px;
+    height: 100%;
+    float: left;
+}
+
+.ResultPanel .normal-timing
+{
+    color: Green;
+    font-weight: bold;
+}
+
+.ResultPanel .exceeded-timing
+{
+    color: Red;
+    font-weight: bolder;
+}
+
+#topnav li
+{
+    display: inline;
+    list-style-type: none;
+    padding-right: 10px;
+}
+
+
+

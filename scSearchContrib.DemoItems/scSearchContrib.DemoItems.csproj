@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B0D606C4-92CC-4B5F-B5DB-0EC6A50CB738}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>scSearchContrib.DemoItems</RootNamespace>
+    <AssemblyName>scSearchContrib.DemoItems</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="master\sitecore\content\Demo.item" />
+    <None Include="master\sitecore\content\Demo\Home.item" />
+    <None Include="master\sitecore\content\Demo\Home\Products.item" />
+    <None Include="master\sitecore\content\Demo\Home\Products\Apple iPhone 4.item" />
+    <None Include="master\sitecore\content\Demo\Home\Products\Apple iPhone 4S.item" />
+    <None Include="master\sitecore\content\Demo\Home\Products\Apple iPhone 5.item" />
+    <None Include="master\sitecore\content\Demo\Home\Products\Dell Latitude 6631.item" />
+    <None Include="master\sitecore\content\Demo\Home\Products\Dell Precision 4333.item" />
+    <None Include="master\sitecore\content\Demo\Home\Products\HTC Evo.item" />
+    <None Include="master\sitecore\content\Demo\Lookups.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Brands.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Brands\Apple.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Brands\Dell.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Brands\HP.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Brands\HTC.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Countries.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Countries\China.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Countries\Thailand.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Countries\USSR.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Markets.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Markets\Asia Pacific.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Markets\Eastern Europe.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Markets\Latin America.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Markets\North America.item" />
+    <None Include="master\sitecore\content\Demo\Lookups\Markets\Western Europe.item" />
+    <None Include="master\sitecore\templates\scSearch Samples.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Lookup.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Lookup\Data.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Lookup\Data\Name.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Lookup\__Standard Values.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Data.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Data\Availability.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Data\Brand.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Data\Market.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Data\Name.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Data\Price.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Data\RelatedProducts.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Data\SKU.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Manufacturing.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Manufacturing\Country.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Manufacturing\Created.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\Manufacturing\Released.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Product\__Standard Values.item" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+  <Target Name="AfterBuild">
+    <CallTarget Targets="DeployToWeb" Condition="Exists('..\serialization_path.txt')" />
+  </Target>
+  <Target Name="DeployToWeb">
+    <ReadLinesFromFile File="..\serialization_path.txt">
+      <Output PropertyName="DeployPath" TaskParameter="Lines" />
+    </ReadLinesFromFile>
+    <CreateItem Include="master\**\*.*;" Exclude="**\.svn\**\*.*">
+      <Output ItemName="DeployFiles" TaskParameter="Include" />
+    </CreateItem>
+    <Copy SourceFiles="@(DeployFiles)" DestinationFiles="@(DeployFiles->'$(DeployPath)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

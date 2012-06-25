@@ -1,0 +1,100 @@
+﻿<%@ Master Language="C#" AutoEventWireup="True" CodeBehind="Demo.master.cs" Inherits="SearchDemo.Scripts.DemoMaster" %>
+
+<%@ Register TagPrefix="demo" TagName="TopNav" Src="~/sitecore modules/Web/SearchDemo/TopNav.ascx" %>
+<%@ Register TagPrefix="demo" TagName="Header" Src="~/sitecore modules/Web/SearchDemo/Header.ascx" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Demo Page</title>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="css/demo.css" rel="stylesheet" type="text/css" />
+    <script src="js/bootstrap.js" type="text/javascript"></script>
+</head>
+<body>
+    <form id="mainform" runat="server">
+    <demo:TopNav runat="server" />
+    <div class="container">
+        <demo:Header ID="TextHeader" runat="server" />
+        <section id="head">
+        <asp:ContentPlaceHolder ID="header" runat="server" />
+        </section>
+        <div class="row">
+            <section id="main">
+            <div class="span4">
+                
+                <h3>
+                    Input Parameters:</h3>
+                <div class="control-group">
+                    <label class="control-label" for="IndexNameList">
+                        Index Name:</label>
+                    <div class="controls">
+                        <asp:DropDownList ID="IndexNameList" CssClass="span1" ClientIDMode="Static" Width="150px"
+                            runat="server" />
+                    </div>
+                </div>
+                <h4>
+                    Base Parameters</h4>
+                    <div class="control-group">
+                        Database Name:
+                    <div class="controls">
+                        <input id="DatabaseNameTextBox" ClientIDMode="Static" placeholder="database name" value="master" runat="server" />
+                    </div>
+                </div>
+                <div class="control-group">
+                     Root Item ID:
+                    <div class="controls">
+                        <input id="RootItemId" ClientIDMode="Static" placeholder="root item id" runat="server" />
+                    </div>
+                </div>
+                 <div class="control-group">
+                      <label class="control-label" for="IndexNameList">
+                       Language:</label>
+                    <div class="controls">
+                        <asp:DropDownList ID="LanguageList" Width="150px" runat="server" />
+                    </div>
+                </div>
+                 <div class="control-group">
+                      <label class="control-label" for="IndexNameList">
+                       Template:</label>
+                    <div class="controls">
+                        <asp:TextBox ID="TemplateFilterTextBox" Width="150px" runat="server" />
+                    </div>
+                </div>
+                 <div class="control-group">
+                     <label class="control-label" for="IndexNameList">
+                       Full Text Query:</label>
+                    <div class="controls">
+                         <asp:TextBox ID="FullTextQueryTextBox" Width="150px" runat="server" />
+                    </div>
+                </div>
+                <asp:ContentPlaceHolder ID="mainPH" runat="server" />
+                <h2>
+                    Execution Settings</h2>
+                <h3>
+                    Threshold</h3>
+                Threshold, ms:
+                <asp:TextBox ID="Threshold" Text="150" runat="server" />
+                <h3>
+                    Output settings</h3>
+                <asp:CheckBox ID="VerboseOutputCheckbox" Text="Enable verbose output" Checked="True"
+                    runat="server" />
+                <asp:CheckBox ID="FullItemOutputCheckbox" Text="Fetch full items" Checked="True"
+                    runat="server" />
+                <br />
+                <asp:Button ID="RunButton" CssClass="btn-danger" runat="server" OnClick="RunButton_Click"
+                    Text="Run" />
+                <asp:Button ID="CacheClearButton" CssClass="btn-warning" runat="server" Text="Clear All Caches"
+                    OnClick="CacheClearButton_Click" />
+            </div>
+        <div class="span8">
+            <asp:Panel ID="Panel1" class="ResultPanel" ScrollBars="Both" Height="600px" runat="server">
+                <asp:Label ID="TimingLabel" CssClass="normal-timing" runat="server"></asp:Label>
+                <asp:Label ID="ResultLabel" runat="server"></asp:Label>
+            </asp:Panel>
+        </div>
+        </section>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

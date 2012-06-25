@@ -1,13 +1,18 @@
-How to build&deploy:
+How to build code and deploy items:
 0. Under the root of the repository, create a folder called /references/6.4.1 and copy the following DLLs from your local Sitecore install in there:
    - Lucene.Net.dll
    - Sitecore.Client.dll
    - Sitecore.Kernel.dll
+
 1. Open both webroot_path.txt and serialization_path.txt and adjust the path accordingly
+
 2. Open the project -> Build Solution
+
 3. Open Sitecore -> CE -> Developer Tab -> Update Database
 
 How to run:
 1. Launch http://localhost/scripts/rebuild.aspx or run Control Panel -> Rebuild the Search Index -> 'demo'
+
 2. Rebuild the "demo" index
+
 3. Launch http://localhost/sitecore modules/web/searchdemo

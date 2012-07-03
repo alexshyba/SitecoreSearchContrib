@@ -42,7 +42,7 @@ namespace scSearchContrib.Searcher.Parameters
 
         protected void AddExactFieldValueClause(Index index, BooleanQuery query, string fieldName, string fieldValue)
         {
-            if (String.IsNullOrEmpty(fieldValue)) return;
+            //if (String.IsNullOrEmpty(fieldValue)) return;
 
             fieldValue = IdHelper.ProcessGUIDs(fieldValue);
 

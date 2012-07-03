@@ -22,7 +22,7 @@ namespace scSearchContrib.Crawler.FieldCrawlers
       {
          if (String.IsNullOrEmpty(_field.Value))
          {
-            return String.Empty;
+            return DateTools.DateToString(DateTime.MinValue, DateTools.Resolution.DAY);
          }
 
          if (FieldTypeManager.GetField(_field) is DateField)

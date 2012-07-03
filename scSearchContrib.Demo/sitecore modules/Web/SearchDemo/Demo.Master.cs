@@ -63,6 +63,7 @@ namespace SearchDemo.Scripts
         {
             // TODO: figure out something better
             IndexNameList.Items.Add("demo");
+            IndexNameList.Items.Add("simple");
         }
 
         protected virtual void RunButton_Click(object sender, EventArgs e)

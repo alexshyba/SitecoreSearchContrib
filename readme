@@ -1,9 +1,11 @@
 How to build code and deploy items:
-0. Under the root of the repository, create a folder called /references/6.4.1 and copy the following DLLs from your local Sitecore install in there:
+0. Under the root of the repository, create a folder called /references and copy the following DLLs from your local Sitecore install in there:
    - Lucene.Net.dll
    - Sitecore.Client.dll
    - Sitecore.Kernel.dll
 
+   (it should build with 6.4.1 or 6.5.0 ver fine)
+   
 1. Open both webroot_path.txt and serialization_path.txt and adjust the path accordingly
 
 2. Open the project -> Build Solution

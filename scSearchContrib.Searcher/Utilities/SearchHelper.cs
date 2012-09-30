@@ -41,20 +41,19 @@ namespace scSearchContrib.Searcher.Utilities
                     {
                         var fieldName = field.Name();
                         var fieldValue = field.StringValue();
-                        itemInfo.Fields[fieldName] = fieldValue;
 
                         //multi-valued fields will return as multiple Fields with the same name
-                        if (itemInfo.AllValues.ContainsKey(fieldName))
+                        if (itemInfo.Values.ContainsKey(fieldName))
                         {
-                            var values = itemInfo.AllValues[fieldName].ToList();
+                            var values = itemInfo.Values[fieldName].ToList();
                             values.Add(fieldValue);
-                            itemInfo.AllValues[fieldName] = values;
+                            itemInfo.Values[fieldName] = values;
                         }
                         else
                         {
                             var values = new List<string>();
                             values.Add(fieldValue);
-                            itemInfo.AllValues[fieldName] = values;
+                            itemInfo.Values[fieldName] = values;
                         }
                     }
 

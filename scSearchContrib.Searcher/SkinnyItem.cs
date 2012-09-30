@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Sitecore.Data;
 using System.Collections.Specialized;
@@ -25,9 +26,12 @@ namespace scSearchContrib.Searcher
          Uri = itemUri;
          Fields.Add(BuiltinFields.Language, Uri.Language.Name);
          Fields.Add(SearchFieldIDs.Version, Uri.Version.Number.ToString());
+         AllValues = new Dictionary<string, IEnumerable<string>>();
       }
 
       public NameValueCollection Fields { get; set; }
+
+      public IDictionary<string, IEnumerable<string>> AllValues { get; set; }
 
       public ItemUri Uri { get; set; }
 

@@ -85,6 +85,8 @@
   <ItemGroup>
     <Compile Include="Crawlers\AdvancedDatabaseCrawler.cs" />
     <Compile Include="DynamicFields\BaseDynamicField.cs" />
+    <Compile Include="FieldCrawlers\IMultivaluedFieldCrawler.cs" />
+    <Compile Include="FieldCrawlers\MultilistFieldCrawler.cs" />
     <Compile Include="SearchField.cs" />
     <Compile Include="FieldCrawlers\DefaultFieldCrawler.cs" />
     <Compile Include="FieldCrawlers\LookupFieldCrawler.cs" />

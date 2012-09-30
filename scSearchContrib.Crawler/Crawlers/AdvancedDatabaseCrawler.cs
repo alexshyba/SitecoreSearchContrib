@@ -33,6 +33,7 @@ namespace scSearchContrib.Crawler.Crawlers
         private SafeDictionary<string, SearchField> _fieldTypes = new SafeDictionary<string, SearchField>();
         private bool _hasFieldExcludes;
         private bool _hasFieldIncludes;
+        private bool _hasFieldTypeExcludes;
 
         #endregion
 
@@ -69,8 +70,15 @@ namespace scSearchContrib.Crawler.Crawlers
 
         protected virtual void ProcessField(SCField field, Document document)
         {
-            var value = ExtendedFieldCrawlerFactory.GetFieldCrawlerValue(field, FieldCrawlers);
+            var values = ExtendedFieldCrawlerFactory.GetFieldCrawlerValues(field, FieldCrawlers);
+            foreach (var value in values)
+            {
+                ProcessFieldValue(field, document, value);
+            }
+        }
 
+        protected virtual void ProcessFieldValue(SCField field, Document document, string value)
+        {
             if (string.IsNullOrEmpty(value)) return;
 
             var indexType = GetIndexType(field);
@@ -129,8 +137,13 @@ namespace scSearchContrib.Crawler.Crawlers
             var indexType = XmlUtil.GetAttribute("indexType", configNode);
             var vectorType = XmlUtil.GetAttribute("vectorType", configNode);
             var boost = XmlUtil.GetAttribute("boost", configNode);
-            var searchField = new SearchField(storageType, indexType, vectorType, boost);
+            var exclude = XmlUtil.GetAttribute("exclude", configNode);
+            var searchField = new SearchField(storageType, indexType, vectorType, boost, exclude);
             FieldTypes.Add(fieldName.ToLowerInvariant(), searchField);
+            if (searchField.Exclude)
+            {
+                _hasFieldTypeExcludes = true;
+            }
         }
 
         #endregion
@@ -175,7 +188,7 @@ namespace scSearchContrib.Crawler.Crawlers
                     filteredFields.Add(item.Fields[ID.Parse(includeFieldId.Key)]);
                 }
             }
-            if (HasFieldExcludes)
+            if (HasFieldExcludes || HasFieldTypeExcludes)
             {
                 foreach (SCField field in item.Fields)
                 {
@@ -183,6 +196,14 @@ namespace scSearchContrib.Crawler.Crawlers
                     if (!(!FieldFilter.ContainsKey(fieldKey) ? true : FieldFilter[fieldKey]))
                     {
                         filteredFields.Remove(field);
+                    }
+                    else
+                    {
+                        object searchField = FieldTypes[field.TypeKey];
+                        if (searchField is SearchField && ((SearchField)searchField).Exclude)
+                        {
+                            filteredFields.Remove(field);
+                        }
                     }
                 }
             }
@@ -313,6 +334,18 @@ namespace scSearchContrib.Crawler.Crawlers
             set
             {
                 _hasFieldIncludes = value;
+            }
+        }
+
+        protected bool HasFieldTypeExcludes
+        {
+            get
+            {
+                return _hasFieldTypeExcludes;
+            }
+            set
+            {
+                _hasFieldTypeExcludes = value;
             }
         }
 

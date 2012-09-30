@@ -21,6 +21,18 @@ namespace scSearchContrib.Searcher
         public QueryRunner(string indexId)
         {
             Index = SearchManager.GetIndex(indexId);
+            UsePreparedQuery = false;
+        }
+
+        /// <summary>
+        /// Allows use of a PreparedQuery, which bypasses some of Sitecore.Search's query rewriting and prevents it from translating Term queries into Prefix queries.
+        /// </summary>
+        /// <param name="indexId"></param>
+        /// <param name="usePreparedQuery"></param>
+        public QueryRunner(string indexId, bool usePreparedQuery)
+        {
+            Index = SearchManager.GetIndex(indexId);
+            UsePreparedQuery = usePreparedQuery;
         }
 
         #endregion ctor
@@ -29,11 +41,13 @@ namespace scSearchContrib.Searcher
 
         public Index Index { get; set; }
 
+        public bool UsePreparedQuery { get; set; }
+
         #endregion Properties
 
         #region Query Runner Methods
 
-        public virtual List<SkinnyItem> RunQuery(Query query, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
+        public virtual List<SkinnyItem> RunQuery(Query query, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
         {
             Assert.ArgumentNotNull(Index, "Demo");
 
@@ -53,11 +67,23 @@ namespace scSearchContrib.Searcher
                     }
                     else
                     {
-                        searchhits = context.Search(query);
+                        if (UsePreparedQuery)
+                        {
+                            searchhits = context.Search(new PreparedQuery(query));
+                        }
+                        else
+                        {
+                            searchhits = context.Search(query);
+                        }
                     }
 
-                    if (searchhits == null) return null;
-                    if (end == 0 || end > searchhits.Length) end = searchhits.Length;
+                    if (searchhits == null)
+                    {
+                        totalResults = 0;
+                        return null;
+                    }
+                    totalResults = searchhits.Length;
+                    if (end == 0 || end > searchhits.Length) end = totalResults;
                     var resultCollection = searchhits.FetchResults(start, end);
                     SearchHelper.GetItemsFromSearchResult(resultCollection, items, showAllVersions);
                 }
@@ -70,6 +96,12 @@ namespace scSearchContrib.Searcher
             }
 
             return items;
+        }
+
+        public virtual List<SkinnyItem> RunQuery(Query query, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
+        {
+            int temp = 0;
+            return RunQuery(query, showAllVersions, sortField, reverse, start, end, out temp);
         }
 
         public virtual List<SkinnyItem> RunQuery(QueryBase query, bool showAllVersions)
@@ -88,14 +120,20 @@ namespace scSearchContrib.Searcher
 
         #region Searching Methods
 
-        public virtual List<SkinnyItem> GetItems(ISearchParam param, QueryOccurance innerOccurance = QueryOccurance.Must, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
+        public virtual List<SkinnyItem> GetItems(ISearchParam param, QueryOccurance innerOccurance, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
         {
             Assert.IsNotNull(Index, "Index");
             var query = param.ProcessQuery(innerOccurance, Index);
-            return RunQuery(query, showAllVersions, sortField, reverse, start, end);
+            return RunQuery(query, showAllVersions, sortField, reverse, start, end, out totalResults);
         }
 
-        public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
+        public virtual List<SkinnyItem> GetItems(ISearchParam param, QueryOccurance innerOccurance = QueryOccurance.Must, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
+        {
+            int temp = 0;
+            return GetItems(param, innerOccurance, showAllVersions, sortField, reverse, start, end, out temp);
+        }
+
+        public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
         {
             Assert.IsNotNull(Index, "Index");
 
@@ -112,7 +150,13 @@ namespace scSearchContrib.Searcher
                 }
             }
 
-            return RunQuery(query, showAllVersions, sortField, reverse, start, end);
+            return RunQuery(query, showAllVersions, sortField, reverse, start, end, out totalResults);
+        }
+
+        public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
+        {
+            int temp = 0;
+            return GetItems(parameters, showAllVersions, sortField, reverse, start, end, out temp);
         }
 
         #endregion

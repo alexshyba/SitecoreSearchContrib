@@ -22,34 +22,14 @@ namespace scSearchContrib.Searcher
 
       public SkinnyItem(ItemUri itemUri)
       {
-         RenderedFields = new List<string>();
-         Uri = itemUri;
-         Values = new Dictionary<string, IEnumerable<string>>
-                      {
-                          {BuiltinFields.Language, new string[] {Uri.Language.Name}},
-                          {SearchFieldIDs.Version, new string[] {Uri.Version.Number.ToString()}}
-                      };
+          Fields = new NameValueCollection();
+          RenderedFields = new List<string>();
+          Uri = itemUri;
+          Fields.Add(BuiltinFields.Language, Uri.Language.Name);
+          Fields.Add(SearchFieldIDs.Version, Uri.Version.Number.ToString());
       }
 
-      [Obsolete("Use Values collection or indexer")]
-      public NameValueCollection Fields
-      {
-          get
-          {
-              var fields = new NameValueCollection();
-              foreach (var field in Values.Keys)
-              {
-                  fields[field] = Values[field].LastOrDefault();
-              }
-              return fields;
-          }
-          set
-          {
-              return;
-          }
-      }
-
-      public IDictionary<string, IEnumerable<string>> Values { get; set; }
+      public NameValueCollection Fields { get; set; }
 
       public ItemUri Uri { get; set; }
 
@@ -67,17 +47,13 @@ namespace scSearchContrib.Searcher
 
       public string Path { get { return this[SearchFieldIDs.FullContentPath]; } }
 
-       public string this[string field]
-       {
-           get
-           {
-               if (Values.ContainsKey(field) && Values[field] != null)
-               {
-                   return Values[field].LastOrDefault();
-               }
-               return null;
-           }
-       }
+      public string this[string field]
+      {
+          get
+          {
+              return Fields[field];
+          }
+      }
 
       public Item GetItem()
       {
@@ -89,7 +65,7 @@ namespace scSearchContrib.Searcher
       {
          var itemInformation = String.Format("{0}, {1}, {2}", Uri.ItemID, Uri.Language, Uri.Version);
 
-         foreach (string key in Values.Keys)
+         foreach (string key in Fields.Keys)
          {
              itemInformation += ", " + this[key];
          }

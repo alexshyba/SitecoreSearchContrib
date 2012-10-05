@@ -39,22 +39,7 @@ namespace scSearchContrib.Searcher.Utilities
 
                     foreach (Field field in result.Document.GetFields())
                     {
-                        var fieldName = field.Name();
-                        var fieldValue = field.StringValue();
-
-                        //multi-valued fields will return as multiple Fields with the same name
-                        if (itemInfo.Values.ContainsKey(fieldName))
-                        {
-                            var values = itemInfo.Values[fieldName].ToList();
-                            values.Add(fieldValue);
-                            itemInfo.Values[fieldName] = values;
-                        }
-                        else
-                        {
-                            var values = new List<string>();
-                            values.Add(fieldValue);
-                            itemInfo.Values[fieldName] = values;
-                        }
+                        itemInfo.Fields.Add(field.Name(), field.StringValue());
                     }
 
                     items.Add(itemInfo);

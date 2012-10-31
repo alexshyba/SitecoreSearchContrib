@@ -6,12 +6,13 @@
       {
       }
 
-      public SearchField(string storageType, string indexType, string vectorType, string boost)
+      public SearchField(string storageType, string indexType, string vectorType, string boost, string exclude)
       {
          SetStorageType(storageType);
          SetIndexType(indexType);
          SetVectorType(vectorType);
          SetBoost(boost);
+         Exclude = Sitecore.MainUtil.StringToBool(exclude, false);
       }
 
       #region Public Properties
@@ -23,6 +24,8 @@
       public Lucene.Net.Documents.Field.TermVector VectorType { get; set; }
 
       public float Boost { get; set; }
+
+      public bool Exclude { get; set; }
 
       #endregion
 

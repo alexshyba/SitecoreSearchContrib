@@ -17,6 +17,7 @@ namespace scSearchContrib.Searcher.Parameters
 
         public string RelatedIds { get; set; }
         public string TemplateIds { get; set; }
+        public bool SearchBaseTemplates { get; set; }
         public string LocationIds { get; set; }
         public string FullTextQuery { get; set; }
 
@@ -104,9 +105,12 @@ namespace scSearchContrib.Searcher.Parameters
         {
             if (String.IsNullOrEmpty(templateIds)) return;
 
-            templateIds = IdHelper.NormalizeGuid(templateIds);
-            var fieldQuery = new FieldQuery(BuiltinFields.Template, templateIds);
-            query.Add(fieldQuery, occurance);
+            string field = BuiltinFields.Template;
+            if (SearchBaseTemplates)
+            {
+                field = BuiltinFields.AllTemplates;
+            }
+            ApplyIdFilter(query, field, templateIds, occurance);
         }
 
         protected void ApplyLocationFilter(CombinedQuery query, string locationIds, QueryOccurance occurance)

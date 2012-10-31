@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Crawlers\AdvancedDatabaseCrawler.cs" />
+    <Compile Include="DynamicFields\AllTemplatesField.cs" />
     <Compile Include="DynamicFields\BaseDynamicField.cs" />
     <Compile Include="SearchField.cs" />
     <Compile Include="FieldCrawlers\DefaultFieldCrawler.cs" />

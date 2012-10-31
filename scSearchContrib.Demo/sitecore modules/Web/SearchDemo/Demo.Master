@@ -80,6 +80,8 @@
                     runat="server" />
                 <asp:CheckBox ID="FullItemOutputCheckbox" Text="Fetch full items" Checked="True"
                     runat="server" />
+                <asp:CheckBox ID="ShowStoredValuesCheckbox" Text="Show stored values (skinny items only)" Checked="False"
+                    runat="server" />
                 <br />
                 <asp:Button ID="RunButton" CssClass="btn-danger" runat="server" OnClick="RunButton_Click"
                     Text="Run" />

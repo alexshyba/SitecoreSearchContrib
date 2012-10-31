@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using Sitecore.Data;
 using System.Collections.Specialized;
@@ -20,11 +22,11 @@ namespace scSearchContrib.Searcher
 
       public SkinnyItem(ItemUri itemUri)
       {
-         Fields = new NameValueCollection();
-         RenderedFields = new List<string>();
-         Uri = itemUri;
-         Fields.Add(BuiltinFields.Language, Uri.Language.Name);
-         Fields.Add(SearchFieldIDs.Version, Uri.Version.Number.ToString());
+          Fields = new NameValueCollection();
+          RenderedFields = new List<string>();
+          Uri = itemUri;
+          Fields.Add(BuiltinFields.Language, Uri.Language.Name);
+          Fields.Add(SearchFieldIDs.Version, Uri.Version.Number.ToString());
       }
 
       public NameValueCollection Fields { get; set; }
@@ -35,15 +37,23 @@ namespace scSearchContrib.Searcher
 
       public string ItemID  { get { return Uri.ItemID.ToString(); } }
 
-      public string Name { get { return Fields[BuiltinFields.Name]; } }
+      public string Name { get { return this[BuiltinFields.Name]; } }
 
       public string Version { get { return Uri.Version.Number.ToString(); } }
 
       public string Language { get { return Uri.Language.Name; } }
 
-      public string TemplateName { get { return Fields[SearchFieldIDs.TemplateName]; } }
+      public string TemplateName { get { return this[SearchFieldIDs.TemplateName]; } }
 
-      public string Path { get { return Fields[SearchFieldIDs.FullContentPath]; } }
+      public string Path { get { return this[SearchFieldIDs.FullContentPath]; } }
+
+      public string this[string field]
+      {
+          get
+          {
+              return Fields[field];
+          }
+      }
 
       public Item GetItem()
       {
@@ -57,7 +67,7 @@ namespace scSearchContrib.Searcher
 
          foreach (string key in Fields.Keys)
          {
-            itemInformation += ", " + Fields[key];
+             itemInformation += ", " + this[key];
          }
 
          return itemInformation;

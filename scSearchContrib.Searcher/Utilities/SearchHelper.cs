@@ -39,7 +39,7 @@ namespace scSearchContrib.Searcher.Utilities
 
                     foreach (Field field in result.Document.GetFields())
                     {
-                        itemInfo.Fields[field.Name()] = field.StringValue();
+                        itemInfo.Fields.Add(field.Name(), field.StringValue());
                     }
 
                     items.Add(itemInfo);

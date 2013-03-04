@@ -101,18 +101,16 @@ namespace scSearchContrib.Searcher.Parameters
             query.Add(filterQuery, occurance);
         }
 
-        protected void ApplyTemplateFilter(CombinedQuery query, string templateIds, QueryOccurance occurance)
-        {
-            if (String.IsNullOrEmpty(templateIds)) return;
-
-            string field = BuiltinFields.Template;
-            if (SearchBaseTemplates)
-            {
-                field = BuiltinFields.AllTemplates;
-            }
-            ApplyIdFilter(query, field, templateIds, occurance);
-        }
-
+		protected void ApplyTemplateFilter(CombinedQuery query, string templateIds, QueryOccurance occurance) {
+			if (String.IsNullOrEmpty(templateIds)) return;
+			var fieldQuery = new CombinedQuery();
+			var values = IdHelper.ParseId(templateIds);
+			foreach (var value in values.Where(ID.IsID)) {
+				AddFieldValueClause(fieldQuery, BuiltinFields.Template, value, QueryOccurance.Should);
+			}
+			query.Add(fieldQuery, occurance);
+		}
+		
         protected void ApplyLocationFilter(CombinedQuery query, string locationIds, QueryOccurance occurance)
         {
             ApplyIdFilter(query, BuiltinFields.Path, locationIds, occurance);

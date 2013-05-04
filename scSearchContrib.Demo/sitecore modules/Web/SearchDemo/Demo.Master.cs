@@ -54,16 +54,13 @@ namespace SearchDemo.Scripts
 
         private void Initialize()
         {
-            InitializeRoots();
             InitializeList();
             InitializeLanguages();
         }
 
         private void InitializeList()
         {
-            // TODO: figure out something better
             IndexNameList.Items.Add("demo");
-            IndexNameList.Items.Add("simple");
         }
 
         protected virtual void RunButton_Click(object sender, EventArgs e)
@@ -152,47 +149,6 @@ namespace SearchDemo.Scripts
 
             TimingLabel.Text += String.Format("<br />Fetching done in {0}<br />", elapsedTime);
         }
-
-        protected virtual void InitializeRoots()
-        {
-            //var db = Sitecore.Context.Database;
-
-            //var rootItem = db.GetItem(ItemIDs.ContentRoot);
-
-            //if (rootItem != null)
-            //{
-            //   RootItemList.Items.Add(new ListItem { Text = rootItem.Paths.FullPath, Value = rootItem.ID.ToString(), Selected = true });
-
-            //   foreach (Item subitem in rootItem.Children)
-            //   {
-            //      RootItemList.Items.Add(new ListItem { Text = subitem.Paths.FullPath, Value = subitem.ID.ToString() });
-            //   }
-            //}
-        }
-
-        protected virtual void InitializeIndexes()
-        {
-            // TODO
-            //for(int i=0; i < SearchManager.IndexCount; i++)
-            //{
-            //    SearchManager.
-            //}
-
-            //var db = Sitecore.Context.Database;
-
-            //var rootItem = db.GetItem(ItemIDs.ContentRoot);
-
-            //if (rootItem != null)
-            //{
-            //   RootItemList.Items.Add(new ListItem { Text = rootItem.Paths.FullPath, Value = rootItem.ID.ToString(), Selected = true });
-
-            //   foreach (Item subitem in rootItem.Children)
-            //   {
-            //      RootItemList.Items.Add(new ListItem { Text = subitem.Paths.FullPath, Value = subitem.ID.ToString() });
-            //   }
-            //}
-        }
-
 
         protected virtual void InitializeLanguages()
         {

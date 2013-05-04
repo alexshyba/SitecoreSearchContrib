@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scSearchContrib.Searcher", "scSearchContrib.Searcher\scSearchContrib.Searcher.csproj", "{2348C92A-A4F1-46DA-A1B1-D4407AC5D82E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scSearchContrib.Crawler", "scSearchContrib.Crawler\scSearchContrib.Crawler.csproj", "{C937CD95-E2B0-4A2F-A69A-EA42A3309D21}"

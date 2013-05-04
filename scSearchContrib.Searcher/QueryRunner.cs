@@ -20,6 +20,18 @@
         public QueryRunner(string indexId)
         {
             Index = SearchManager.GetIndex(indexId);
+            UsePreparedQuery = false;
+        }
+
+        /// <summary>
+        /// Allows use of a PreparedQuery, which bypasses some of Sitecore.Search's query rewriting and prevents it from translating Term queries into Prefix queries.
+        /// </summary>
+        /// <param name="indexId"></param>
+        /// <param name="usePreparedQuery"></param>
+        public QueryRunner(string indexId, bool usePreparedQuery)
+        {
+            Index = SearchManager.GetIndex(indexId);
+            UsePreparedQuery = usePreparedQuery;
         }
 
         #endregion ctor
@@ -27,6 +39,8 @@
         #region Properties
 
         public Index Index { get; set; }
+
+        public bool UsePreparedQuery { get; set; }
 
         #endregion Properties
 
@@ -66,7 +80,14 @@
                     }
                     else
                     {
-                        searchhits = context.Search(query);
+                        if (UsePreparedQuery)
+                        {
+                            searchhits = context.Search(new PreparedQuery(query));
+                        }
+                        else
+                        {
+                            searchhits = context.Search(query);
+                        }
                     }
 
                     if (searchhits == null)

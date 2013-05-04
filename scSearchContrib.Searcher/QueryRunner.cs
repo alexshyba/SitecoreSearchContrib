@@ -1,19 +1,18 @@
-﻿#region usings
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Lucene.Net.Search;
-using Sitecore.Diagnostics;
-using Sitecore.Search;
-using Sitecore.StringExtensions;
-using scSearchContrib.Searcher.Parameters;
-using scSearchContrib.Searcher.Utilities;
-
-#endregion
-
-namespace scSearchContrib.Searcher
+﻿namespace scSearchContrib.Searcher
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Lucene.Net.Search;
+
+    using scSearchContrib.Searcher.Parameters;
+    using scSearchContrib.Searcher.Utilities;
+
+    using Sitecore.Diagnostics;
+    using Sitecore.Search;
+    using Sitecore.StringExtensions;
+
     public class QueryRunner : IDisposable
     {
         #region ctor
@@ -30,6 +29,20 @@ namespace scSearchContrib.Searcher
         public Index Index { get; set; }
 
         #endregion Properties
+
+        #region static scope
+
+        /// <summary>
+        /// Returns a search index by specified index id
+        /// </summary>
+        /// <param name="indexId">Search index id</param>
+        /// <returns>Search index object</returns>
+        public static Index GetIndex(string indexId)
+        {
+            return SearchManager.GetIndex(indexId);
+        }
+
+        #endregion static scope
 
         #region Query Runner Methods
 
@@ -61,8 +74,13 @@ namespace scSearchContrib.Searcher
                         totalResults = 0;
                         return null;
                     }
+
                     totalResults = searchhits.Length;
-                    if (end == 0 || end > searchhits.Length) end = totalResults;
+                    if (end == 0 || end > searchhits.Length)
+                    {
+                        end = totalResults;
+                    }
+
                     var resultCollection = searchhits.FetchResults(start, end - start);
                     SearchHelper.GetItemsFromSearchResult(resultCollection, items, showAllVersions);
                 }
@@ -79,20 +97,15 @@ namespace scSearchContrib.Searcher
 
         public virtual List<SkinnyItem> RunQuery(Query query, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
         {
-            int temp = 0;
+            int temp;
             return RunQuery(query, showAllVersions, sortField, reverse, start, end, out temp);
         }
 
-        public virtual List<SkinnyItem> RunQuery(QueryBase query, bool showAllVersions)
+        public virtual List<SkinnyItem> RunQuery(QueryBase query, bool showAllVersions = false)
         {
             var translator = new QueryTranslator(Index);
             var luceneQuery = translator.Translate(query);
             return RunQuery(luceneQuery, showAllVersions);
-        }
-
-        public virtual List<SkinnyItem> RunQuery(QueryBase query)
-        {
-            return RunQuery(query, false);
         }
 
         #endregion
@@ -108,7 +121,7 @@ namespace scSearchContrib.Searcher
 
         public virtual List<SkinnyItem> GetItems(ISearchParam param, QueryOccurance innerOccurance = QueryOccurance.Must, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
         {
-            int temp = 0;
+            int temp;
             return GetItems(param, innerOccurance, showAllVersions, sortField, reverse, start, end, out temp);
         }
 
@@ -134,25 +147,11 @@ namespace scSearchContrib.Searcher
 
         public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
         {
-            int temp = 0;
+            int temp;
             return GetItems(parameters, showAllVersions, sortField, reverse, start, end, out temp);
         }
 
         #endregion
-
-        #region static scope
-
-        /// <summary>
-        /// Returns a search index by specified index id
-        /// </summary>
-        /// <param name="indexId">Search index id</param>
-        /// <returns>Search index object</returns>
-        public static Index GetIndex(string indexId)
-        {
-            return SearchManager.GetIndex(indexId);
-        }
-
-        #endregion static scope
 
         #region IDisposable Members
 

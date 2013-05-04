@@ -1,4 +1,5 @@
 ﻿using System;
+using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Search.Crawlers.FieldCrawlers;
 using scSearchContrib.Searcher.Utilities;
@@ -23,12 +24,18 @@ namespace scSearchContrib.Crawler.FieldCrawlers
             if (FieldTypeManager.GetField(_field) is LookupField)
             {
                 var lookupField = new LookupField(_field);
-                value = IdHelper.NormalizeGuid(lookupField.TargetID);
+                if (lookupField.TargetID != ID.Null)
+                {
+                    value = IdHelper.NormalizeGuid(lookupField.TargetID);
+                }
             }
             if (FieldTypeManager.GetField(_field) is ReferenceField)
             {
                 var referenceField = new ReferenceField(_field);
-                value = IdHelper.NormalizeGuid(referenceField.TargetID);
+                if (referenceField.TargetID != ID.Null)
+                {
+                    value = IdHelper.NormalizeGuid(referenceField.TargetID);
+                }
             }
 
             return value;

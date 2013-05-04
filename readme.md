@@ -1,3 +1,4 @@
+<h1>Welcome to Sitecore.Search Contrib project</h1>
 <h2>Compatibility</h2>
 Please note that this branch is compatible with Sitecore 6.4.x and 6.5.x releases.
 

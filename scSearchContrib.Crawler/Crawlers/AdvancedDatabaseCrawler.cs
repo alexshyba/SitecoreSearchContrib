@@ -70,9 +70,19 @@ namespace scSearchContrib.Crawler.Crawlers
 
         protected virtual void ProcessField(SCField field, Document document)
         {
-            var value = ExtendedFieldCrawlerFactory.GetFieldCrawlerValue(field, FieldCrawlers);
+            var values = ExtendedFieldCrawlerFactory.GetFieldCrawlerValues(field, FieldCrawlers);
+            foreach (var value in values)
+            {
+                ProcessFieldValue(field, document, value);
+            }
+        }
 
-            if (string.IsNullOrEmpty(value)) return;
+        protected virtual void ProcessFieldValue(SCField field, Document document, string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return;
+            }
 
             var indexType = GetIndexType(field);
             var storageType = GetStorageType(field);

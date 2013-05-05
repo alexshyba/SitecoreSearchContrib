@@ -97,7 +97,7 @@
         {
             get
             {
-                return this.Fields[BuiltinFields.Name];
+                return this[BuiltinFields.Name];
             }
         }
 
@@ -130,7 +130,7 @@
         {
             get
             {
-                return this.Fields[SearchFieldIDs.TemplateName];
+                return this[SearchFieldIDs.TemplateName];
             }
         }
 
@@ -141,7 +141,24 @@
         {
             get
             {
-                return this.Fields[SearchFieldIDs.FullContentPath];
+                return this[SearchFieldIDs.FullContentPath];
+            }
+        }
+
+        /// <summary>
+        /// The this.
+        /// </summary>
+        /// <param name="field">
+        /// The field.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public string this[string field]
+        {
+            get
+            {
+                return this.Fields[field];
             }
         }
 

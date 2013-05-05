@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.UI.WebControls;
-using System.Diagnostics;
-using Sitecore.Caching;
-using Sitecore.Data.Items;
-using Sitecore.Data.Managers;
-using scSearchContrib.Demo;
-using scSearchContrib.Searcher;
-using scSearchContrib.Searcher.Utilities;
-
-namespace SearchDemo.Scripts
+﻿namespace SearchDemo.Scripts
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+    using System.Web.UI.WebControls;
+
+    using scSearchContrib.Demo;
+    using scSearchContrib.Searcher;
+    using scSearchContrib.Searcher.Utilities;
+
+    using Sitecore.Caching;
+    using Sitecore.Data.Items;
+    using Sitecore.Data.Managers;
+
     public partial class DemoMaster : System.Web.UI.MasterPage
     {
         protected string IndexName
@@ -100,18 +103,46 @@ namespace SearchDemo.Scripts
 
         protected virtual void RenderItemDetails(IEnumerable<SkinnyItem> skinnyItems)
         {
-            ResultLabel.Text = String.Empty;
+            ResultLabel.Text = string.Empty;
 
             if (VerboseOutputCheckbox.Checked)
             {
-                ResultLabel.Text = "<ol>";
-
+                var resultLabel = new StringBuilder();
+                resultLabel.Append("<ol>");
                 foreach (var skinnyItem in skinnyItems)
                 {
-                    ResultLabel.Text += String.Format("<li>{0}</li>", skinnyItem.Uri);
+                    resultLabel.Append(string.Format("<li>{0}", skinnyItem.Uri));
+                    if (ShowStoredValuesCheckbox.Checked && skinnyItem.Fields.Count > 0)
+                    {
+                        resultLabel.Append("<ul>");
+                        foreach (var key in skinnyItem.Fields.Keys)
+                        {
+                            resultLabel.Append("<li>");
+                            resultLabel.Append(key);
+                            resultLabel.Append(":<br/>");
+                            var values = skinnyItem.Fields.GetValues((string)key);
+                            if (values == null)
+                            {
+                                continue;
+                            }
+
+                            foreach (var value in values)
+                            {
+                                resultLabel.Append(value);
+                                resultLabel.Append("<br/>");
+                            }
+
+                            resultLabel.Append("</li>");
+                        }
+
+                        resultLabel.Append("</ul>");
+                    }
+
+                    resultLabel.Append("</li>");
                 }
 
-                ResultLabel.Text += "</ol>";
+                resultLabel.Append("</ol>");
+                ResultLabel.Text = resultLabel.ToString();
             }
         }
 

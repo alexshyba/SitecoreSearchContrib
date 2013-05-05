@@ -17,8 +17,6 @@
         {
             public DateRange()
             {
-                InclusiveStart = true;
-                InclusiveEnd = true;
             }
 
             public DateRange(string fieldName, DateTime startDate, DateTime endDate)
@@ -26,14 +24,14 @@
                 FieldName = fieldName.ToLowerInvariant();
                 StartDate = startDate;
                 EndDate = endDate;
-                InclusiveStart = true;
-                InclusiveEnd = true;
             }
 
             #region Properties
 
+            [Obsolete("This property is not used any more")]
             public bool InclusiveStart { get; set; }
 
+            [Obsolete("This property is not used any more")]
             public bool InclusiveEnd { get; set; }
 
             public string FieldName { get; set; }
@@ -94,16 +92,6 @@
         {
             var startDateTime = dateRangeField.StartDate;
             var endDateTime = dateRangeField.EndDate;
-
-            if (dateRangeField.InclusiveStart && startDateTime > DateTime.MinValue.AddDays(1))
-            {
-                startDateTime = startDateTime.AddDays(-1);
-            }
-
-            if (dateRangeField.InclusiveEnd && endDateTime < DateTime.MaxValue.AddDays(-1))
-            {
-                endDateTime = endDateTime.AddDays(1);
-            }
 
             // converting to lucene format
             var startDate = DateTools.DateToString(startDateTime, DateTools.Resolution.DAY);

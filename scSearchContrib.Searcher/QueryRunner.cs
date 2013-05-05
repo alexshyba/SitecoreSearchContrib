@@ -62,7 +62,7 @@
 
         public virtual List<SkinnyItem> RunQuery(Query query, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
         {
-            Assert.ArgumentNotNull(Index, "Demo");
+            Assert.ArgumentNotNull(Index, "Index");
 
             var items = new List<SkinnyItem>();
 
@@ -80,14 +80,8 @@
                     }
                     else
                     {
-                        if (UsePreparedQuery)
-                        {
-                            searchhits = context.Search(new PreparedQuery(query));
-                        }
-                        else
-                        {
-                            searchhits = context.Search(query);
-                        }
+                        searchhits = this.UsePreparedQuery ? context.Search(new PreparedQuery(query)) :
+                                                             context.Search(query);
                     }
 
                     if (searchhits == null)

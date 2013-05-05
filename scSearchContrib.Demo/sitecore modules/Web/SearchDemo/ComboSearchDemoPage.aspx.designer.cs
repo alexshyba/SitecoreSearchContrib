@@ -13,22 +13,22 @@ namespace scSearchContrib.Demo {
     public partial class ComboSearchDemoPage {
         
         /// <summary>
-        /// BaseOccuranceList control.
+        /// BaseConditionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList BaseOccuranceList;
+        protected global::System.Web.UI.WebControls.DropDownList BaseConditionList;
         
         /// <summary>
-        /// DateRangeOccuranceList control.
+        /// DateRangeConditionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DateRangeOccuranceList;
+        protected global::System.Web.UI.WebControls.DropDownList DateRangeConditionList;
         
         /// <summary>
         /// DateFieldName1TextBox control.
@@ -58,13 +58,13 @@ namespace scSearchContrib.Demo {
         protected global::System.Web.UI.WebControls.TextBox DateEndDate1TextBox;
         
         /// <summary>
-        /// InnerDateRangeOccuranceList control.
+        /// InnerDateRangeConditionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList InnerDateRangeOccuranceList;
+        protected global::System.Web.UI.WebControls.DropDownList InnerDateRangeConditionList;
         
         /// <summary>
         /// DateFieldName2TextBox control.
@@ -94,13 +94,13 @@ namespace scSearchContrib.Demo {
         protected global::System.Web.UI.WebControls.TextBox DateEndDate2TextBox;
         
         /// <summary>
-        /// NumericRangeOccuranceList control.
+        /// NumericRangeConditionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList NumericRangeOccuranceList;
+        protected global::System.Web.UI.WebControls.DropDownList NumericRangeConditionList;
         
         /// <summary>
         /// NumericFieldName1TextBox control.
@@ -130,13 +130,13 @@ namespace scSearchContrib.Demo {
         protected global::System.Web.UI.WebControls.TextBox NumericEnd1TextBox;
         
         /// <summary>
-        /// InnerNumericRangeOccuranceList control.
+        /// InnerNumericRangeConditionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList InnerNumericRangeOccuranceList;
+        protected global::System.Web.UI.WebControls.DropDownList InnerNumericRangeConditionList;
         
         /// <summary>
         /// NumericFieldName2TextBox control.

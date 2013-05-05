@@ -18,7 +18,7 @@
    <asp:TextBox ID="FieldValue1TextBox" runat="server" />
    <br />
    Inner Condition:
-   <asp:DropDownList ID="OccuranceList" runat="server">
+   <asp:DropDownList ID="ConditionList" runat="server">
       <asp:ListItem Text="AND" Value="0" Selected="True" />
       <asp:ListItem Text="OR" Value="2" />
       <asp:ListItem Text="NOT" Value="1" />

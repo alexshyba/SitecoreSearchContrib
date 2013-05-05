@@ -35,7 +35,7 @@
             Inner Condition:
          </td>
          <td>
-            <asp:DropDownList ID="InnerDateRangeOccuranceList" runat="server">
+            <asp:DropDownList ID="InnerDateRangeConditionList" runat="server">
                <asp:ListItem Text="AND" Value="0" Selected="True" />
                <asp:ListItem Text="OR" Value="2" />
                <asp:ListItem Text="NOT" Value="1" />

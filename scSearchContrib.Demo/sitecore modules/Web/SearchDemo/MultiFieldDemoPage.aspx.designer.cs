@@ -31,13 +31,13 @@ namespace scSearchContrib.Demo {
         protected global::System.Web.UI.WebControls.TextBox FieldValue1TextBox;
         
         /// <summary>
-        /// OccuranceList control.
+        /// ConditionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList OccuranceList;
+        protected global::System.Web.UI.WebControls.DropDownList ConditionList;
         
         /// <summary>
         /// FieldName2TextBox control.

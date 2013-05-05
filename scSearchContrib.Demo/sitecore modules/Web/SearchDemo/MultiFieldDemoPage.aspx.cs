@@ -34,7 +34,7 @@ namespace scSearchContrib.Demo
                                  {
                                      Database = databaseName,
                                      Refinements = refinements,
-                                     InnerCondition = GetCondition(OccuranceList),
+                                     InnerCondition = GetCondition(ConditionList),
                                      LocationIds = locationFilter,
                                      TemplateIds = templateFilter,
                                      FullTextQuery = fullTextQuery,

@@ -1,104 +1,116 @@
-﻿using System;
-using System.Collections.Generic;
-using Lucene.Net.Documents;
-using Lucene.Net.Index;
-using Lucene.Net.Search;
-using Sitecore.Search;
-using scSearchContrib.Searcher.Utilities;
-
-namespace scSearchContrib.Searcher.Parameters
+﻿namespace scSearchContrib.Searcher.Parameters
 {
-   public class DateRangeSearchParam : SearchParam
-   {
-      public class DateRange
-      {
-         public DateRange()
-         {
-            InclusiveStart = true;
-            InclusiveEnd = true;
-         }
+    using System;
+    using System.Collections.Generic;
 
-         public DateRange(string fieldName, DateTime startDate, DateTime endDate)
-         {
-            FieldName = fieldName.ToLowerInvariant();
-            StartDate = startDate;
-            EndDate = endDate;
-            InclusiveStart = true;
-            InclusiveEnd = true;
-         }
+    using Lucene.Net.Documents;
+    using Lucene.Net.Index;
+    using Lucene.Net.Search;
 
-         #region Properties
+    using scSearchContrib.Searcher.Utilities;
 
-         public bool InclusiveStart { get; set; }
+    using Sitecore.Search;
 
-         public bool InclusiveEnd { get; set; }
+    public class DateRangeSearchParam : SearchParam
+    {
+        public class DateRange
+        {
+            public DateRange()
+            {
+                InclusiveStart = true;
+                InclusiveEnd = true;
+            }
 
-         public string FieldName { get; set; }
+            public DateRange(string fieldName, DateTime startDate, DateTime endDate)
+            {
+                FieldName = fieldName.ToLowerInvariant();
+                StartDate = startDate;
+                EndDate = endDate;
+                InclusiveStart = true;
+                InclusiveEnd = true;
+            }
 
-         public DateTime StartDate { get; set; }
+            #region Properties
 
-         public DateTime EndDate { get; set; }
+            public bool InclusiveStart { get; set; }
 
-         #endregion Properties
-      }
+            public bool InclusiveEnd { get; set; }
 
-      public List<DateRange> Ranges { get; set; }
+            public string FieldName { get; set; }
 
-      public QueryOccurance InnerCondition { get; set; }
+            public DateTime StartDate { get; set; }
 
-      public override BooleanQuery ProcessQuery(QueryOccurance outerCondition, Index index)
-      {
-         var outerQuery = new BooleanQuery();
+            public DateTime EndDate { get; set; }
 
-         var translator = new QueryTranslator(index);
-         var innerOccurance = translator.GetOccur(InnerCondition);
-         var outerOccurance = translator.GetOccur(outerCondition);
+            #endregion Properties
+        }
 
-         var baseQuery = base.ProcessQuery(outerCondition, index);
-         if (baseQuery != null && baseQuery.Clauses().Count > 0) outerQuery.Add(baseQuery, outerOccurance);
+        public List<DateRange> Ranges { get; set; }
 
-         var dateRangeQuery = ApplyDateRangeSearchParam(innerOccurance);
+        public QueryOccurance InnerCondition { get; set; }
 
-         if (dateRangeQuery != null) outerQuery.Add(dateRangeQuery, outerOccurance);
+        public override BooleanQuery ProcessQuery(QueryOccurance condition, Index index)
+        {
+            var outerQuery = new BooleanQuery();
 
-         return outerQuery;
-      }
+            var translator = new QueryTranslator(index);
+            var innerCondition = translator.GetOccur(InnerCondition);
+            var outerCondition = translator.GetOccur(condition);
 
-      protected BooleanQuery ApplyDateRangeSearchParam(BooleanClause.Occur innerCondition)
-      {
-         var innerQuery = new BooleanQuery();
+            var baseQuery = base.ProcessQuery(condition, index);
+            if (baseQuery != null && baseQuery.Clauses().Count > 0)
+            {
+                outerQuery.Add(baseQuery, outerCondition);
+            }
 
-         if (Ranges.Count <= 0) return null;
+            var dateRangeQuery = ApplyDateRangeSearchParam(innerCondition);
 
-         foreach (var dateParam in Ranges)
-         {
-            AddDateRangeQuery(innerQuery, dateParam, innerCondition);
-         }
+            if (dateRangeQuery != null)
+            {
+                outerQuery.Add(dateRangeQuery, outerCondition);
+            }
 
-         return innerQuery;
-      }
+            return outerQuery;
+        }
 
-      protected void AddDateRangeQuery(BooleanQuery query, DateRange dateRangeField, BooleanClause.Occur occurance)
-      {
-         var startDateTime = dateRangeField.StartDate;
-         var endDateTime = dateRangeField.EndDate;
+        protected BooleanQuery ApplyDateRangeSearchParam(BooleanClause.Occur innerCondition)
+        {
+            var innerQuery = new BooleanQuery();
 
-         if (dateRangeField.InclusiveStart && startDateTime > DateTime.MinValue.AddDays(1))
-         {
-            startDateTime = startDateTime.AddDays(-1);
-         }
+            if (Ranges.Count <= 0)
+            {
+                return null;
+            }
 
-         if (dateRangeField.InclusiveEnd && endDateTime < DateTime.MaxValue.AddDays(-1))
-         {
-            endDateTime = endDateTime.AddDays(1);
-         }
+            foreach (var dateParam in Ranges)
+            {
+                AddDateRangeQuery(innerQuery, dateParam, innerCondition);
+            }
 
-         // converting to lucene format
-         var startDate = DateTools.DateToString(startDateTime, DateTools.Resolution.DAY);
-         var endDate = DateTools.DateToString(endDateTime, DateTools.Resolution.DAY);
+            return innerQuery;
+        }
 
-         var rangeQuery = new RangeQuery(new Term(dateRangeField.FieldName, startDate), new Term(dateRangeField.FieldName, endDate), true);
-         query.Add(rangeQuery, occurance);
-      }
-   }
+        protected void AddDateRangeQuery(BooleanQuery query, DateRange dateRangeField, BooleanClause.Occur condition)
+        {
+            var startDateTime = dateRangeField.StartDate;
+            var endDateTime = dateRangeField.EndDate;
+
+            if (dateRangeField.InclusiveStart && startDateTime > DateTime.MinValue.AddDays(1))
+            {
+                startDateTime = startDateTime.AddDays(-1);
+            }
+
+            if (dateRangeField.InclusiveEnd && endDateTime < DateTime.MaxValue.AddDays(-1))
+            {
+                endDateTime = endDateTime.AddDays(1);
+            }
+
+            // converting to lucene format
+            var startDate = DateTools.DateToString(startDateTime, DateTools.Resolution.DAY);
+            var endDate = DateTools.DateToString(endDateTime, DateTools.Resolution.DAY);
+
+            var rangeQuery = new RangeQuery(new Term(dateRangeField.FieldName, startDate), new Term(dateRangeField.FieldName, endDate), true);
+            query.Add(rangeQuery, condition);
+        }
+    }
 }

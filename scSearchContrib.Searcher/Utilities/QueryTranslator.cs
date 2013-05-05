@@ -83,24 +83,24 @@ namespace scSearchContrib.Searcher.Utilities
          return booleanQuery;
       }
 
-      public virtual BooleanClause.Occur GetOccur(QueryOccurance occurance)
+      public virtual BooleanClause.Occur GetOccur(QueryOccurance condition)
       {
-         if (occurance == QueryOccurance.Must)
+         if (condition == QueryOccurance.Must)
          {
             return BooleanClause.Occur.MUST;
          }
 
-         if (occurance == QueryOccurance.MustNot)
+         if (condition == QueryOccurance.MustNot)
          {
             return BooleanClause.Occur.MUST_NOT;
          }
 
-         if (occurance == QueryOccurance.Should)
+         if (condition == QueryOccurance.Should)
          {
             return BooleanClause.Occur.SHOULD;
          }
 
-         throw new Exception("Unknown occurance");
+         throw new Exception("Unknown condition");
       }
 
       protected Query InternalParse(string query)

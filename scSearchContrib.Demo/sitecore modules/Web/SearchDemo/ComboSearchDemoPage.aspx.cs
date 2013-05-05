@@ -54,11 +54,11 @@ namespace scSearchContrib.Demo
                                                  string fullTextQuery)
         {
 
-            var baseCondition = GetCondition(BaseOccuranceList);
-            var outerNumParamParamCondition = GetCondition(NumericRangeOccuranceList);
-            var outerDateParamCondition = GetCondition(DateRangeOccuranceList);
-            var innerNumParamParamCondition = GetCondition(InnerNumericRangeOccuranceList);
-            var innerDateParamCondition = GetCondition(InnerDateRangeOccuranceList);
+            var baseCondition = GetCondition(BaseConditionList);
+            var outerNumParamParamCondition = GetCondition(NumericRangeConditionList);
+            var outerDateParamCondition = GetCondition(DateRangeConditionList);
+            var innerNumParamParamCondition = GetCondition(InnerNumericRangeConditionList);
+            var innerDateParamCondition = GetCondition(InnerDateRangeConditionList);
 
             var baseSearchParam = new SearchParam
             {

@@ -1,62 +1,73 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Lucene.Net.Search;
-using Sitecore.Search;
-using scSearchContrib.Searcher.Utilities;
-
-namespace scSearchContrib.Searcher.Parameters
+﻿namespace scSearchContrib.Searcher.Parameters
 {
-   public class MultiFieldSearchParam : SearchParam
-   {
-      public struct Refinement
-      {
-         public string Name { get; private set; }
-         public string Value { get; private set; }
+    using System.Collections.Generic;
+    using System.Linq;
 
-         public Refinement(string name, string value): this() { Name = name; Value = value; }
-      }
+    using Lucene.Net.Search;
 
-      public MultiFieldSearchParam()
-      {
-         Refinements = new List<Refinement>();
-      }
+    using scSearchContrib.Searcher.Utilities;
 
-      public QueryOccurance InnerCondition { get; set; }
+    using Sitecore.Search;
 
-      public IEnumerable<Refinement> Refinements { get; set; }
+    public class MultiFieldSearchParam : SearchParam
+    {
+        public struct Refinement
+        {
+            public string Name { get; private set; }
 
-      public override BooleanQuery ProcessQuery(QueryOccurance occurance, Index index)
-      {
-         var outerQuery = new BooleanQuery();
+            public string Value { get; private set; }
 
-         var refinementQuery = ApplyRefinements(Refinements, InnerCondition);
+            public Refinement(string name, string value) : this() { Name = name; Value = value; }
+        }
 
-         var translator = new QueryTranslator(index);
-         var refBooleanQuery = translator.ConvertCombinedQuery(refinementQuery);
-         var outerOccurance = translator.GetOccur(occurance);
+        public MultiFieldSearchParam()
+        {
+            Refinements = new List<Refinement>();
+        }
 
-         if (refBooleanQuery != null && refBooleanQuery.Clauses().Count > 0)
-            outerQuery.Add(refBooleanQuery, outerOccurance);
+        public QueryOccurance InnerCondition { get; set; }
 
-         var baseQuery = base.ProcessQuery(occurance, index);
-         if (baseQuery != null)
-            outerQuery.Add(baseQuery, outerOccurance);
+        public IEnumerable<Refinement> Refinements { get; set; }
 
-         return outerQuery;
-      }
+        public override BooleanQuery ProcessQuery(QueryOccurance condition, Index index)
+        {
+            var outerQuery = new BooleanQuery();
 
-      protected CombinedQuery ApplyRefinements(IEnumerable<Refinement> refinements, QueryOccurance occurance)
-      {
-         if (refinements.Count() <= 0) return new CombinedQuery();
+            var refinementQuery = ApplyRefinements(Refinements, InnerCondition);
 
-         var innerQuery = new CombinedQuery();
+            var translator = new QueryTranslator(index);
+            var refBooleanQuery = translator.ConvertCombinedQuery(refinementQuery);
+            var outerCondition = translator.GetOccur(condition);
 
-         foreach (var refinement in refinements)
-         {
-            AddFieldValueClause(innerQuery, refinement.Name, refinement.Value, occurance);
-         }
+            if (refBooleanQuery != null && refBooleanQuery.Clauses().Count > 0)
+            {
+                outerQuery.Add(refBooleanQuery, outerCondition);
+            }
 
-         return innerQuery;
-      }
-   }
+            var baseQuery = base.ProcessQuery(condition, index);
+            if (baseQuery != null)
+            {
+                outerQuery.Add(baseQuery, outerCondition);
+            }
+
+            return outerQuery;
+        }
+
+        protected CombinedQuery ApplyRefinements(IEnumerable<Refinement> refinements, QueryOccurance condition)
+        {
+            if (!refinements.Any())
+            {
+                return new CombinedQuery();
+            }
+
+            var innerQuery = new CombinedQuery();
+
+            foreach (var refinement in refinements)
+            {
+                AddFieldValueClause(innerQuery, refinement.Name, refinement.Value, condition);
+            }
+
+            return innerQuery;
+        }
+    }
 }

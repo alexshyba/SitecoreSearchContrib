@@ -45,7 +45,7 @@ namespace scSearchContrib.Demo
                                  LocationIds = locationFilter,
                                  TemplateIds = templateFilter,
                                  FullTextQuery = fullTextQuery,
-                                 InnerCondition = GetCondition(InnerDateRangeOccuranceList),
+                                 InnerCondition = GetCondition(InnerDateRangeConditionList),
                                  Language = language
                               };
 

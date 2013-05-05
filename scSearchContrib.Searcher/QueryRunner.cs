@@ -133,17 +133,17 @@
 
         #region Searching Methods
 
-        public virtual List<SkinnyItem> GetItems(ISearchParam param, QueryOccurance innerOccurance, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
+        public virtual List<SkinnyItem> GetItems(ISearchParam param, QueryOccurance innerCondition, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
         {
             Assert.IsNotNull(Index, "Index");
-            var query = param.ProcessQuery(innerOccurance, Index);
+            var query = param.ProcessQuery(innerCondition, Index);
             return RunQuery(query, showAllVersions, sortField, reverse, start, end, out totalResults);
         }
 
-        public virtual List<SkinnyItem> GetItems(ISearchParam param, QueryOccurance innerOccurance = QueryOccurance.Must, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
+        public virtual List<SkinnyItem> GetItems(ISearchParam param, QueryOccurance innerCondition = QueryOccurance.Must, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)
         {
             int temp;
-            return GetItems(param, innerOccurance, showAllVersions, sortField, reverse, start, end, out temp);
+            return GetItems(param, innerCondition, showAllVersions, sortField, reverse, start, end, out temp);
         }
 
         public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)

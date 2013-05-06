@@ -5,13 +5,7 @@
 
     using Lucene.Net.Search;
 
-    using Sitecore.Diagnostics;
-
-    using scSearchContrib.Searcher.Utilities;
-
-    using Sitecore.Search;
-
-    public class DateRangeSearchParam : SearchParam
+    public class DateRangeSearchParam : MultiSearchParam
     {
         public class DateRange
         {
@@ -45,26 +39,9 @@
 
         public List<DateRange> Ranges { get; set; }
 
-        public QueryOccurance InnerCondition { get; set; }
-
-        public override Query ProcessQuery(QueryOccurance condition, Index index)
+        protected override Query BuildQuery(BooleanClause.Occur condition)
         {
-            Assert.ArgumentNotNull(index, "Index");
-
-            var baseQuery = base.ProcessQuery(condition, index) as BooleanQuery ?? new BooleanQuery();
-
-            var translator = new QueryTranslator(index);
-            Assert.IsNotNull(translator, "Query Translator");
-            var innerCondition = translator.GetOccur(InnerCondition);
-            var outerCondition = translator.GetOccur(condition);
-
-            var dateRangeQuery = QueryBuilder.BuildDateRangeSearchParam(this.Ranges, innerCondition);
-            if (dateRangeQuery != null)
-            {
-                baseQuery.Add(dateRangeQuery, outerCondition);
-            }
-
-            return baseQuery;
+            return QueryBuilder.BuildDateRangeSearchParam(this.Ranges, condition);
         }
     }
 }

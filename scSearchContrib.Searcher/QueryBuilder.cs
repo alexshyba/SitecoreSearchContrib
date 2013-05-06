@@ -17,6 +17,38 @@
 
     internal static class QueryBuilder
     {
+        public static Query BuildPartialFieldValueClause(Index index, string fieldName, string fieldValue)
+        {
+            Assert.ArgumentNotNull(index, "Index");
+            Assert.ArgumentNotNullOrEmpty(fieldName, "fieldName");
+
+            if (string.IsNullOrEmpty(fieldValue))
+            {
+                return null;
+            }
+
+            fieldValue = IdHelper.ProcessGUIDs(fieldValue);
+            var fieldQuery = new QueryParser(fieldName.ToLowerInvariant(), index.Analyzer).Parse(fieldValue);
+            return fieldQuery;
+        }
+
+        public static Query BuildExactFieldValueClause(Index index, string fieldName, string fieldValue)
+        {
+            Assert.ArgumentNotNull(index, "Index");
+
+            if (string.IsNullOrEmpty(fieldName) || string.IsNullOrEmpty(fieldValue))
+            {
+                return null;
+            }
+
+            fieldValue = IdHelper.ProcessGUIDs(fieldValue);
+
+            var phraseQuery = new PhraseQuery();
+            phraseQuery.Add(new Term(fieldName.ToLowerInvariant(), fieldValue.ToLowerInvariant()));
+
+            return phraseQuery;
+        }
+
         public static Query BuildTemplateQuery(string templateIds)
         {
             return BuildIdFilter(BuiltinFields.Template, templateIds);

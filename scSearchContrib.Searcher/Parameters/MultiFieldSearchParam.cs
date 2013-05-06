@@ -1,17 +1,10 @@
 ﻿namespace scSearchContrib.Searcher.Parameters
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     using Lucene.Net.Search;
 
-    using Sitecore.Diagnostics;
-
-    using scSearchContrib.Searcher.Utilities;
-
-    using Sitecore.Search;
-
-    public class MultiFieldSearchParam : SearchParam
+    public class MultiFieldSearchParam : MultiSearchParam
     {
         public struct Refinement
         {
@@ -27,29 +20,11 @@
             Refinements = new List<Refinement>();
         }
 
-        public QueryOccurance InnerCondition { get; set; }
+        public List<Refinement> Refinements { get; set; }
 
-        public IEnumerable<Refinement> Refinements { get; set; }
-
-        public override Query ProcessQuery(QueryOccurance condition, Index index)
+        protected override Query BuildQuery(BooleanClause.Occur innerCondition)
         {
-            Assert.ArgumentNotNull(index, "Index");
-
-            var translator = new QueryTranslator(index);
-            Assert.IsNotNull(translator, "Query Translator");
-
-            var innerCondition = translator.GetOccur(InnerCondition);
-            var outerCondition = translator.GetOccur(condition);
-
-            var baseQuery = base.ProcessQuery(condition, index) as BooleanQuery ?? new BooleanQuery();
-
-            var multiFieldQuery = QueryBuilder.BuildMultiFieldQuery(this.Refinements.ToList(), innerCondition);
-            if (multiFieldQuery != null)
-            {
-                baseQuery.Add(multiFieldQuery, outerCondition);
-            }
-
-            return baseQuery;
+            return QueryBuilder.BuildMultiFieldQuery(this.Refinements, innerCondition);
         }
     }
 }

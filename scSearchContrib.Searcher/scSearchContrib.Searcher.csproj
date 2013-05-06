@@ -51,6 +51,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parameters\MultiSearchParam.cs" />
     <Compile Include="Parameters\ISearchParam.cs" />
     <Compile Include="Parameters\DateRangeSearchParam.cs" />
     <Compile Include="Parameters\FieldSearchParam.cs" />

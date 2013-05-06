@@ -5,6 +5,8 @@
 
     using Lucene.Net.Search;
 
+    using Sitecore.Diagnostics;
+
     using scSearchContrib.Searcher.Utilities;
 
     using Sitecore.Search;
@@ -29,45 +31,25 @@
 
         public IEnumerable<Refinement> Refinements { get; set; }
 
-        public override BooleanQuery ProcessQuery(QueryOccurance condition, Index index)
+        public override Query ProcessQuery(QueryOccurance condition, Index index)
         {
-            var outerQuery = new BooleanQuery();
-
-            var refinementQuery = ApplyRefinements(Refinements, InnerCondition);
+            Assert.ArgumentNotNull(index, "Index");
 
             var translator = new QueryTranslator(index);
-            var refBooleanQuery = translator.ConvertCombinedQuery(refinementQuery);
+            Assert.IsNotNull(translator, "Query Translator");
+
+            var innerCondition = translator.GetOccur(InnerCondition);
             var outerCondition = translator.GetOccur(condition);
 
-            if (refBooleanQuery != null && refBooleanQuery.Clauses().Count > 0)
+            var baseQuery = base.ProcessQuery(condition, index) as BooleanQuery ?? new BooleanQuery();
+
+            var multiFieldQuery = QueryBuilder.BuildMultiFieldQuery(this.Refinements.ToList(), innerCondition);
+            if (multiFieldQuery != null)
             {
-                outerQuery.Add(refBooleanQuery, outerCondition);
+                baseQuery.Add(multiFieldQuery, outerCondition);
             }
 
-            var baseQuery = base.ProcessQuery(condition, index);
-            if (baseQuery != null)
-            {
-                outerQuery.Add(baseQuery, outerCondition);
-            }
-
-            return outerQuery;
-        }
-
-        protected CombinedQuery ApplyRefinements(IEnumerable<Refinement> refinements, QueryOccurance condition)
-        {
-            if (!refinements.Any())
-            {
-                return new CombinedQuery();
-            }
-
-            var innerQuery = new CombinedQuery();
-
-            foreach (var refinement in refinements)
-            {
-                AddFieldValueClause(innerQuery, refinement.Name, refinement.Value, condition);
-            }
-
-            return innerQuery;
+            return baseQuery;
         }
     }
 }

@@ -21,6 +21,10 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,6 +73,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sitecore modules\Web\SearchDemo\BaseDemoPage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sitecore modules\Web\SearchDemo\ComboFieldSearchDemoPage.aspx.cs">
+      <DependentUpon>ComboFieldSearchDemoPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sitecore modules\Web\SearchDemo\ComboFieldSearchDemoPage.aspx.designer.cs">
+      <DependentUpon>ComboFieldSearchDemoPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="sitecore modules\Web\SearchDemo\SortDemoPage.aspx.cs">
       <DependentUpon>SortDemoPage.aspx</DependentUpon>
@@ -148,6 +159,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\animated-overlay.gif" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\jquery-ui-1.10.3.custom.css" />
+    <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="sitecore modules\Web\SearchDemo\js\jquery-ui-1.10.3.custom.js" />
+    <Content Include="sitecore modules\Web\SearchDemo\js\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="sitecore modules\Web\SearchDemo\ComboFieldSearchDemoPage.aspx" />
     <Content Include="sitecore modules\Web\SearchDemo\css\bootstrap-responsive.css" />
     <Content Include="sitecore modules\Web\SearchDemo\css\bootstrap-responsive.min.css" />
     <Content Include="sitecore modules\Web\SearchDemo\css\bootstrap.css" />
@@ -158,6 +189,7 @@
     <Content Include="sitecore modules\Web\SearchDemo\img\grid-18px-masked.png" />
     <Content Include="sitecore modules\Web\SearchDemo\js\bootstrap.js" />
     <Content Include="sitecore modules\Web\SearchDemo\js\bootstrap.min.js" />
+    <Content Include="sitecore modules\Web\SearchDemo\js\jquery-1.9.1.min.js" />
     <Content Include="sitecore modules\Web\SearchDemo\SortDemoPage.aspx" />
     <Content Include="sitecore modules\Web\SearchDemo\Header.ascx" />
     <Content Include="sitecore modules\Web\SearchDemo\default.aspx" />
@@ -214,7 +246,7 @@
     <ReadLinesFromFile File="..\webroot_path.txt">
       <Output PropertyName="DeployPath" TaskParameter="Lines" />
     </ReadLinesFromFile>
-    <CreateItem Include="bin\*.*;sitecore modules\web\searchdemo\*.aspx;sitecore modules\web\searchdemo\*.master;sitecore modules\web\searchdemo\*.ascx;sitecore modules\web\searchdemo\**\*.css;sitecore modules\web\searchdemo\**\*.js;sitecore modules\web\searchdemo\img\*.*" Exclude="**\.svn\**\*.*">
+    <CreateItem Include="bin\*.*;sitecore modules\web\searchdemo\*.aspx;sitecore modules\web\searchdemo\*.master;sitecore modules\web\searchdemo\*.ascx;sitecore modules\web\searchdemo\**\*.css;sitecore modules\web\searchdemo\**\*.js;sitecore modules\web\searchdemo\**\*.gif;sitecore modules\web\searchdemo\**\*.png;sitecore modules\web\searchdemo\img\*.*" Exclude="**\.svn\**\*.*">
       <Output ItemName="DeployFiles" TaskParameter="Include" />
     </CreateItem>
     <Copy SourceFiles="@(DeployFiles)" DestinationFiles="@(DeployFiles->'$(DeployPath)\%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />

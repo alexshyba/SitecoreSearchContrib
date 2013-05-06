@@ -21,6 +21,8 @@
                         Range</a></li>
                     <li class=""><a href="/sitecore modules/web/SearchDemo/ComboSearchDemoPage.aspx">Combo</a>
                     </li>
+                     <li class=""><a href="/sitecore modules/web/SearchDemo/ComboFieldSearchDemoPage.aspx">Combo Field</a>
+                    </li>
                 </ul>
             </div>
         </div>

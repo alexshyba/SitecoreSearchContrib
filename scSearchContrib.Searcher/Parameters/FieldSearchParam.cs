@@ -4,6 +4,8 @@
     using Lucene.Net.QueryParsers;
     using Lucene.Net.Search;
 
+    using Sitecore.Diagnostics;
+
     using scSearchContrib.Searcher.Utilities;
 
     using Sitecore.Search;
@@ -40,20 +42,31 @@
         /// <returns>
         /// The <see cref="BooleanQuery"/>.
         /// </returns>
-        public override BooleanQuery ProcessQuery(QueryOccurance condition, Index index)
+        public override Query ProcessQuery(QueryOccurance condition, Index index)
         {
-            var query = base.ProcessQuery(condition, index) ?? new BooleanQuery();
+            Assert.ArgumentNotNull(index, "Index");
 
-            if (Partial)
+            var baseQuery = base.ProcessQuery(condition, index);
+
+            var translator = new QueryTranslator(index);
+            Assert.IsNotNull(translator, "translator");
+
+            var fieldQuery = this.Partial ? this.AddPartialFieldValueClause(index, this.FieldName, this.FieldValue) :
+                                            this.AddExactFieldValueClause(index, this.FieldName, this.FieldValue);
+
+            if (baseQuery == null)
             {
-                AddPartialFieldValueClause(index, query, FieldName, FieldValue);
-            }
-            else
-            {
-                AddExactFieldValueClause(index, query, FieldName, FieldValue);
+                return fieldQuery;
             }
 
-            return query;
+            if (baseQuery is BooleanQuery)
+            {
+                var booleanQuery = baseQuery as BooleanQuery;
+
+                booleanQuery.Add(fieldQuery, translator.GetOccur(condition));
+            }
+
+            return baseQuery;
         }
 
         /// <summary>
@@ -71,18 +84,19 @@
         /// <param name="fieldValue">
         /// The field value.
         /// </param>
-        protected void AddPartialFieldValueClause(Index index, BooleanQuery query, string fieldName, string fieldValue)
+        protected Query AddPartialFieldValueClause(Index index, string fieldName, string fieldValue)
         {
+            Assert.ArgumentNotNull(index, "Index");
+            Assert.ArgumentNotNullOrEmpty(fieldName, "fieldName");
+
             if (string.IsNullOrEmpty(fieldValue))
             {
-                return;
+                return null;
             }
 
             fieldValue = IdHelper.ProcessGUIDs(fieldValue);
-
             var fieldQuery = new QueryParser(fieldName.ToLowerInvariant(), index.Analyzer).Parse(fieldValue);
-
-            query.Add(fieldQuery, BooleanClause.Occur.MUST);
+            return fieldQuery;
         }
 
         /// <summary>
@@ -100,19 +114,21 @@
         /// <param name="fieldValue">
         /// The field value.
         /// </param>
-        protected void AddExactFieldValueClause(Index index, BooleanQuery query, string fieldName, string fieldValue)
+        protected Query AddExactFieldValueClause(Index index, string fieldName, string fieldValue)
         {
-            if (string.IsNullOrEmpty(fieldValue))
+            Assert.ArgumentNotNull(index, "Index");
+
+            if (string.IsNullOrEmpty(fieldName) || string.IsNullOrEmpty(fieldValue))
             {
-                return;
+                return null;
             }
 
             fieldValue = IdHelper.ProcessGUIDs(fieldValue);
 
             var phraseQuery = new PhraseQuery();
-            phraseQuery.Add(new Term(fieldName.ToLowerInvariant(), fieldValue));
+            phraseQuery.Add(new Term(fieldName.ToLowerInvariant(), fieldValue.ToLowerInvariant()));
 
-            query.Add(phraseQuery, BooleanClause.Occur.MUST);
+            return phraseQuery;
         }
     }
 }

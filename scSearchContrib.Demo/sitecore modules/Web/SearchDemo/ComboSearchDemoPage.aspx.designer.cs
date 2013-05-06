@@ -22,15 +22,6 @@ namespace scSearchContrib.Demo {
         protected global::System.Web.UI.WebControls.DropDownList BaseConditionList;
         
         /// <summary>
-        /// DateRangeConditionList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DateRangeConditionList;
-        
-        /// <summary>
         /// DateFieldName1TextBox control.
         /// </summary>
         /// <remarks>
@@ -92,15 +83,6 @@ namespace scSearchContrib.Demo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox DateEndDate2TextBox;
-        
-        /// <summary>
-        /// NumericRangeConditionList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList NumericRangeConditionList;
         
         /// <summary>
         /// NumericFieldName1TextBox control.

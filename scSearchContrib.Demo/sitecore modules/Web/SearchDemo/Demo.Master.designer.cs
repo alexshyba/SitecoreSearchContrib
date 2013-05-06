@@ -118,7 +118,7 @@ namespace SearchDemo.Scripts {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox VerboseOutputCheckbox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox VerboseOutputCheckbox;
         
         /// <summary>
         /// FullItemOutputCheckbox control.
@@ -127,7 +127,7 @@ namespace SearchDemo.Scripts {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox FullItemOutputCheckbox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox FullItemOutputCheckbox;
         
         /// <summary>
         /// ShowStoredValuesCheckbox control.
@@ -136,7 +136,7 @@ namespace SearchDemo.Scripts {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ShowStoredValuesCheckbox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox ShowStoredValuesCheckbox;
         
         /// <summary>
         /// RunButton control.
@@ -182,5 +182,14 @@ namespace SearchDemo.Scripts {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label ResultLabel;
+        
+        /// <summary>
+        /// scripts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder scripts;
     }
 }

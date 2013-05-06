@@ -2,34 +2,15 @@
     MasterPageFile="~/sitecore modules/Web/SearchDemo/Demo.Master" CodeBehind="FieldSearchDemoPage.aspx.cs" %>
 
 <asp:Content ContentPlaceHolderID="header" runat="server">
-    <h2>
-        Scenario: Search for specific field value
-    </h2>
-    <p>
-    </p>
+    <h2>Scenario: Search for specific field value</h2>
 </asp:Content>
+
 <asp:Content ContentPlaceHolderID="mainPH" runat="server">
-    <table>
-        <tr>
-            <td>
-                Field Name
-            </td>
-            <td>
-                <asp:TextBox ID="FieldName" Width="300px" runat="server" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Field Value
-            </td>
-            <td>
-                <asp:TextBox ID="FieldValue" Width="300px" runat="server" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Checkbox ID="Partial" Text="Partial Search" runat="server" />
-            </td>
-        </tr>
-    </table>
+    <label>Field Name:</label>
+    <asp:TextBox ID="FieldName" placeholder="lowercased field name" CssClass="input-xlarge" runat="server" />
+    <label>Field Value:</label>
+    <asp:TextBox ID="FieldValue" placeholder="field value" CssClass="input-xlarge" runat="server" />
+    <label class="checkbox">
+        <input type="checkbox" id="Partial" runat="server"/> Partial Search
+    </label>
 </asp:Content>

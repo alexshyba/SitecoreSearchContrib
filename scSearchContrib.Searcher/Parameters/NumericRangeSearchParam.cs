@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
 
-    using Lucene.Net.Documents;
-    using Lucene.Net.Index;
     using Lucene.Net.Search;
+
+    using Sitecore.Diagnostics;
 
     using scSearchContrib.Searcher.Utilities;
 
@@ -25,8 +25,19 @@
 
             #region Properties
 
+            /// <summary>
+            /// Gets or sets the field name.
+            /// </summary>
             public string FieldName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the start.
+            /// </summary>
             public long Start { get; set; }
+
+            /// <summary>
+            /// Gets or sets the end.
+            /// </summary>
             public long End { get; set; }
 
             #endregion Properties
@@ -36,53 +47,23 @@
 
         public QueryOccurance InnerCondition { get; set; }
 
-        public override BooleanQuery ProcessQuery(QueryOccurance condition, Index index)
+        public override Query ProcessQuery(QueryOccurance condition, Index index)
         {
-            var outerQuery = new BooleanQuery();
+            Assert.ArgumentNotNull(index, "Index");
 
-            var baseQuery = base.ProcessQuery(condition, index) ?? new BooleanQuery();
+            var baseQuery = base.ProcessQuery(condition, index) as BooleanQuery ?? new BooleanQuery();
             var translator = new QueryTranslator(index);
+            Assert.IsNotNull(translator, "Query Translator");
+
             var innerCondition = translator.GetOccur(InnerCondition);
             var outerCondition = translator.GetOccur(condition);
-
-            if (baseQuery.Clauses().Count > 0)
+            var dateRangeQuery = QueryBuilder.BuildNumericRangeSearchParam(this.Ranges, innerCondition);
+            if (dateRangeQuery != null)
             {
-                outerQuery.Add(baseQuery, outerCondition);
+                baseQuery.Add(dateRangeQuery, outerCondition);
             }
 
-            var numericQuery = ApplyNumericRangeSearchParam(innerCondition);
-
-            if (numericQuery != null)
-            {
-                outerQuery.Add(numericQuery, outerCondition);
-            }
-
-            return outerQuery;
-        }
-
-        protected BooleanQuery ApplyNumericRangeSearchParam(BooleanClause.Occur innerCondition)
-        {
-            var innerQuery = new BooleanQuery();
-
-            if (Ranges.Count <= 0)
-            {
-                return null;
-            }
-
-            foreach (var range in Ranges)
-            {
-                AddNumericRangeQuery(innerQuery, range, innerCondition);
-            }
-
-            return innerQuery;
-        }
-
-        protected void AddNumericRangeQuery(BooleanQuery query, NumericRangeField range, BooleanClause.Occur condition)
-        {
-            var startTerm = new Term(range.FieldName, NumberTools.LongToString(range.Start));
-            var endTerm = new Term(range.FieldName, NumberTools.LongToString(range.End));
-            var rangeQuery = new RangeQuery(startTerm, endTerm, true);
-            query.Add(rangeQuery, condition);
+            return baseQuery;
         }
     }
 }

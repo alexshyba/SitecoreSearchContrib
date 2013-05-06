@@ -9,23 +9,11 @@
         Search, <strong>sort</strong> and refine by location, language, template, full text query
     </p>
 </asp:Content>
+
 <asp:Content ContentPlaceHolderID="mainPH" runat="server">
-    <table>
-        <tr>
-            <td>
-                Sort by:
-            </td>
-            <td>
-                <asp:TextBox ID="SortByTextBox" Width="300px" runat="server" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Descending:
-            </td>
-            <td>
-                <asp:CheckBox ID="DescendingCheckBox" Text="Descending" Checked="true" runat="server" />
-            </td>
-        </tr>
-    </table>
+    <label>Sort by:</label>
+    <asp:TextBox ID="SortByTextBox" placeholder="lowercased field name" CssClass="input-xlarge" runat="server" />
+    <label class="checkbox">
+        <input type="checkbox" id="DescendingCheckBox" checked="True" runat="server" ClientIDMode="Static" /> Descending
+    </label>
 </asp:Content>

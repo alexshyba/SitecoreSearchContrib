@@ -6,98 +6,85 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Demo Page</title>
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/ui-lightness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
     <link href="css/demo.css" rel="stylesheet" type="text/css" />
-    <script src="js/bootstrap.js" type="text/javascript"></script>
 </head>
 <body>
     <form id="mainform" runat="server">
-    <demo:TopNav runat="server" />
-    <div class="container">
-        <demo:Header ID="TextHeader" runat="server" />
-        <section id="head">
+        <demo:TopNav runat="server" />
+        <div class="container">
+            <demo:Header ID="TextHeader" runat="server" />
+            <section id="head">
         <asp:ContentPlaceHolder ID="header" runat="server" />
         </section>
-        <div class="row">
-            <section id="main">
-            <div class="span4">
-                
-                <h3>
-                    Input Parameters:</h3>
-                <div class="control-group">
-                    <label class="control-label" for="IndexNameList">
-                        Index Name:</label>
-                    <div class="controls">
-                        <asp:DropDownList ID="IndexNameList" CssClass="span1" ClientIDMode="Static" Width="150px"
-                            runat="server" />
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="tabbable tabs-left">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#lA" data-toggle="tab">Parameters</a></li>
+                            <li class=""><a href="#lB" data-toggle="tab">Settings</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="lA">
+                                <label>Index Name:</label>
+                                <asp:DropDownList ID="IndexNameList" ClientIDMode="Static" CssClass="input-xlarge" runat="server" />
+                                <h5>Base Parameters</h5>
+                                <label>Database Name:</label>
+                                <input id="DatabaseNameTextBox" clientidmode="Static" class="input-xlarge" placeholder="database name" value="master" runat="server" />
+                                <label>Root:</label>
+                                <input id="RootItemId" clientidmode="Static" class="input-xlarge" placeholder="One GUID" runat="server" />
+                                <label>Language:</label>
+                                <asp:DropDownList ID="LanguageList" ClientIDMode="Static" CssClass="input-xlarge" runat="server" />
+                                <label>Template(s):</label>
+                                <asp:TextBox ID="TemplateFilterTextBox" TextMode="MultiLine" placeholder="One more more GUIDs (pipe separated)" CssClass="input-xlarge" runat="server" />
+                                <label>Full Text Query:</label>
+                                <asp:TextBox ID="FullTextQueryTextBox" placeholder="full text query" CssClass="input-xlarge" runat="server" />
+                                <asp:ContentPlaceHolder ID="mainPH" runat="server" />
+                            </div>
+                            <div class="tab-pane" id="lB">
+                                <label>Threshold, ms:</label>
+                                <asp:TextBox ID="Threshold" placeholder="Threshold, ms" Text="250" CssClass="input-xlarge" runat="server" />
+                                <label class="checkbox">
+                                    <input type="checkbox" id="VerboseOutputCheckbox" checked="True" runat="server" />
+                                    Enable verbose output
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" id="FullItemOutputCheckbox" checked="True" runat="server" />
+                                    Fetch full items
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" id="ShowStoredValuesCheckbox" checked="False" runat="server" />
+                                    Show stored values (skinny items only)
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <h4>
-                    Base Parameters</h4>
-                    <div class="control-group">
-                        Database Name:
-                    <div class="controls">
-                        <input id="DatabaseNameTextBox" ClientIDMode="Static" placeholder="database name" value="master" runat="server" />
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="well">
+                                <asp:Button ID="RunButton" CssClass="btn btn-large btn-primary" runat="server" OnClick="RunButton_Click" Text="Run" />
+                                <asp:Button ID="CacheClearButton" CssClass="btn btn-large" runat="server" Text="Clear All Caches" OnClick="CacheClearButton_Click" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <asp:Panel ID="Panel1" class="ResultPanel" ScrollBars="Both" Height="600px" runat="server">
+                                <asp:Label ID="TimingLabel" CssClass="normal-timing" runat="server"></asp:Label>
+                                <asp:Label ID="ResultLabel" runat="server"></asp:Label>
+                            </asp:Panel>
+                        </div>
                     </div>
                 </div>
-                <div class="control-group">
-                     Root Item ID:
-                    <div class="controls">
-                        <input id="RootItemId" ClientIDMode="Static" placeholder="root item id" runat="server" />
-                    </div>
-                </div>
-                 <div class="control-group">
-                      <label class="control-label" for="IndexNameList">
-                       Language:</label>
-                    <div class="controls">
-                        <asp:DropDownList ID="LanguageList" Width="150px" runat="server" />
-                    </div>
-                </div>
-                 <div class="control-group">
-                      <label class="control-label" for="IndexNameList">
-                       Template:</label>
-                    <div class="controls">
-                        <asp:TextBox ID="TemplateFilterTextBox" Width="150px" runat="server" />
-                    </div>
-                </div>
-                 <div class="control-group">
-                     <label class="control-label" for="IndexNameList">
-                       Full Text Query:</label>
-                    <div class="controls">
-                         <asp:TextBox ID="FullTextQueryTextBox" Width="150px" runat="server" />
-                    </div>
-                </div>
-                <asp:ContentPlaceHolder ID="mainPH" runat="server" />
-                <h2>
-                    Execution Settings</h2>
-                <h3>
-                    Threshold</h3>
-                Threshold, ms:
-                <asp:TextBox ID="Threshold" Text="150" runat="server" />
-                <h3>
-                    Output settings</h3>
-                <asp:CheckBox ID="VerboseOutputCheckbox" Text="Enable verbose output" Checked="True"
-                    runat="server" />
-                <asp:CheckBox ID="FullItemOutputCheckbox" Text="Fetch full items" Checked="True"
-                    runat="server" />
-                <br />
-                <asp:CheckBox ID="ShowStoredValuesCheckbox" Text="Show stored values (skinny items only)" Checked="False"
-                    runat="server" />
-                <br />
-                <asp:Button ID="RunButton" CssClass="btn-danger" runat="server" OnClick="RunButton_Click"
-                    Text="Run" />
-                <asp:Button ID="CacheClearButton" CssClass="btn-warning" runat="server" Text="Clear All Caches"
-                    OnClick="CacheClearButton_Click" />
             </div>
-        <div class="span8">
-            <asp:Panel ID="Panel1" class="ResultPanel" ScrollBars="Both" Height="600px" runat="server">
-                <asp:Label ID="TimingLabel" CssClass="normal-timing" runat="server"></asp:Label>
-                <asp:Label ID="ResultLabel" runat="server"></asp:Label>
-            </asp:Panel>
         </div>
-        </section>
-        </div>
-    </div>
     </form>
+    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="scripts" runat="server" />
 </body>
 </html>

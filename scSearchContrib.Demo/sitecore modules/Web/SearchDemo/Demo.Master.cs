@@ -172,18 +172,35 @@
 
             TimingLabel.CssClass = "normal-timing";
 
-            if (ts.Ticks > int.Parse(Threshold.Text) * 10000)
+            if (ts.Ticks > ThresholdSetting * 10000)
             {
                 TimingLabel.CssClass = "exceeded-timing";
             }
 
-
             TimingLabel.Text += String.Format("<br />Fetching done in {0}<br />", elapsedTime);
+        }
+
+        protected int ThresholdSetting
+        {
+            get
+            {
+                var threshold = 250;
+
+                if (string.IsNullOrEmpty(this.Threshold.Text))
+                {
+                    return threshold;
+                }
+
+                int.TryParse(this.Threshold.Text, out threshold);
+                return threshold;
+            }
         }
 
         protected virtual void InitializeLanguages()
         {
             LanguageList.Items.Clear();
+
+            LanguageList.Items.Add(new ListItem());
 
             LanguageList.Items.Add(new ListItem { Text = Sitecore.Context.Language.GetDisplayName(), Value = Sitecore.Context.Language.Name, Selected = true });
 

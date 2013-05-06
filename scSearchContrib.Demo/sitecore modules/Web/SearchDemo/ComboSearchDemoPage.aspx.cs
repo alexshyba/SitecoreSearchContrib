@@ -6,6 +6,8 @@ using Sitecore.StringExtensions;
 
 namespace scSearchContrib.Demo
 {
+    using System.Linq;
+
     public partial class ComboSearchDemoPage : BaseDemoPage
     {
         protected List<NumericRangeSearchParam.NumericRangeField> NumericRanges
@@ -53,40 +55,43 @@ namespace scSearchContrib.Demo
                                                  string locationFilter,
                                                  string fullTextQuery)
         {
+            var baseCondition = GetCondition(this.BaseConditionList);
+            var outerNumParamParamCondition = GetCondition(this.InnerNumericRangeConditionList);
+            var outerDateParamCondition = GetCondition(this.InnerDateRangeConditionList);
+            var innerNumParamParamCondition = GetCondition(this.InnerNumericRangeConditionList);
+            var innerDateParamCondition = GetCondition(this.InnerDateRangeConditionList);
 
-            var baseCondition = GetCondition(BaseConditionList);
-            var outerNumParamParamCondition = GetCondition(NumericRangeConditionList);
-            var outerDateParamCondition = GetCondition(DateRangeConditionList);
-            var innerNumParamParamCondition = GetCondition(InnerNumericRangeConditionList);
-            var innerDateParamCondition = GetCondition(InnerDateRangeConditionList);
-
-            var baseSearchParam = new SearchParam
-            {
-                Database = databaseName,
-                LocationIds = locationFilter,
-                TemplateIds = templateFilter,
-                FullTextQuery = fullTextQuery,
-                Language = language,
-                Condition = baseCondition
-            };
-
-            var numSearchParam = new NumericRangeSearchParam
-            {
-                Ranges = NumericRanges,
-                InnerCondition = innerNumParamParamCondition,
-                Condition = outerNumParamParamCondition
-            };
-
-            var dateSearchParam = new DateRangeSearchParam
-               {
-                   Ranges = DateRanges,
-                   InnerCondition = innerDateParamCondition,
-                   Condition = outerDateParamCondition
-               };
+            var parameters = new List<SearchParam>
+                                 {
+                                     new SearchParam
+                                         {
+                                             Database = databaseName,
+                                             LocationIds = locationFilter,
+                                             TemplateIds = templateFilter,
+                                             FullTextQuery = fullTextQuery,
+                                             Language = language,
+                                             Condition = baseCondition
+                                         },
+                                     new NumericRangeSearchParam
+                                         {
+                                             Ranges = this.NumericRanges,
+                                             InnerCondition =
+                                                 innerNumParamParamCondition,
+                                             Condition =
+                                                 outerNumParamParamCondition
+                                         },
+                                     new DateRangeSearchParam
+                                         {
+                                             Ranges = this.DateRanges,
+                                             InnerCondition =
+                                                 innerDateParamCondition,
+                                             Condition = outerDateParamCondition
+                                         }
+                                 };
 
             using (var runner = new QueryRunner(indexName))
             {
-                return runner.GetItems(new[] { baseSearchParam, numSearchParam, dateSearchParam });
+                return runner.GetItems(parameters);
             }
         }
     }

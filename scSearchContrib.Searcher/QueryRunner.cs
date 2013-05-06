@@ -66,10 +66,18 @@
 
             var items = new List<SkinnyItem>();
 
+            if (query == null || string.IsNullOrEmpty(query.ToString()))
+            {
+                Log.Debug("SitecoreSearchContrib: Attempt to execute an empty query.");
+                totalResults = 0;
+                return items;
+            }
+
             try
             {
                 using (var context = new IndexSearchContext(Index))
                 {
+                    Log.Debug(string.Format("SitecoreSearchContrib: Executing query: {0}", query));
                     SearchHits searchhits;
                     if (!sortField.IsNullOrEmpty())
                     {
@@ -96,8 +104,10 @@
                         end = totalResults;
                     }
 
+                    Log.Debug(string.Format("SitecoreSearchContrib: Total hits: {0}", totalResults));
                     var resultCollection = searchhits.FetchResults(start, end - start);
                     SearchHelper.GetItemsFromSearchResult(resultCollection, items, showAllVersions);
+                    Log.Debug(string.Format("SitecoreSearchContrib: Total results: {0}", resultCollection.Count));
                 }
             }
             catch (Exception exception)
@@ -142,19 +152,33 @@
 
         public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
         {
+            return this.GetItems(parameters, QueryOccurance.Should, showAllVersions, sortField, reverse, start, end, out totalResults);
+        }
+
+        public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, QueryOccurance innerCondition, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
+        {
             Assert.IsNotNull(Index, "Index");
 
             var translator = new QueryTranslator(Index);
             var query = new BooleanQuery();
-
             foreach (var parameter in parameters.Where(p => p != null))
             {
-                var innerQueryResult = parameter.ProcessQuery(parameter.Condition, Index);
-                if (innerQueryResult.GetClauses().Length > 0)
+                var nestedQuery = parameter.ProcessQuery(parameter.Condition, Index);
+
+                if (nestedQuery == null)
                 {
-                    var clause = new BooleanClause(innerQueryResult, translator.GetOccur(parameter.Condition));
-                    query.Add(clause);
+                    continue;
                 }
+
+                if (nestedQuery is BooleanQuery)
+                {
+                    if ((nestedQuery as BooleanQuery).Clauses().Count == 0)
+                    {
+                        continue;
+                    }
+                }
+
+                query.Add(nestedQuery, translator.GetOccur(parameter.Condition));
             }
 
             return RunQuery(query, showAllVersions, sortField, reverse, start, end, out totalResults);

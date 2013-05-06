@@ -10,15 +10,7 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="mainPH" runat="server">
-<table>
-   <tr>
-      <td>
-         Find relations to:
-      </td>
-      <td>
-         <asp:Textbox id="RelatedIdsTextBox" width="300px" runat="server" />
-      </td>
-   </tr>
-</table>
+    <label>Find relations to:</label>
+    <asp:TextBox ID="RelatedIdsTextBox" placeholder="GUID of the item" CssClass="input-xlarge" runat="server" />
 </asp:Content>
 

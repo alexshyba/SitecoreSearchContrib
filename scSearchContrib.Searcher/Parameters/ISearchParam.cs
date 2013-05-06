@@ -6,6 +6,6 @@
 
     public interface ISearchParam
     {
-        BooleanQuery ProcessQuery(QueryOccurance condition, Index index);
+        Query ProcessQuery(QueryOccurance condition, Index index);
     }
 }

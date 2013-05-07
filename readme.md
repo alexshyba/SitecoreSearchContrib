@@ -1,4 +1,5 @@
 <h1>Welcome to Sitecore Search Contrib project</h1>
+Please visit <a href="http://sitecorian.github.io/SitecoreSearchContrib/"> the project website </a> for more information.
 <h2>Compatibility</h2>
 The codebase is compatible with Sitecore 6.4.x and 6.5.x releases.
 It should also work with 6.6.0, however the code will build with warnings due to deprecated methods in Lucene 2.9. The code is still expected to work as expected.

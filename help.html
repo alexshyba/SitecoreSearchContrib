@@ -36,15 +36,24 @@ Here are quick steps to follow if you are having trouble with getting searching 
 <h2>1. Verify that your index is getting built</h2>
 
 <p>If your index is not getting updated, it's probably an issue with your Sitecore Search configuration, not the module.</p>
-
+<p>You may want to run through these <a href="http://sitecoreblog.alexshyba.com/2011/04/search-index-troubleshooting.html">troubleshooting steps</a> to confirm.</p>
 <h2>2. Make sure that things are getting indexed</h2>
-
+<h3>Check the index files under /data/indexes folder.</h3>
+<h3>Check the Sitecore logs for any errors during indexing.</h3>
 <h3>Use Luke. It's awesome.</h3>
-
+<p>The tool will let you open up your index and browse it. Here is the link to the <a href="https://code.google.com/p/luke/downloads/list">download page</a></p>
 <h2>3. Make sure your quieries are properly built.</h2>
-
+<p>You may be getting no hits because of malformed queries. To check for that, follow these steps:</p>
 <h3>3.1 Activate DEBUG mode</h3>
-<h3>3.2 Use Luke to test the query</h3>
+<p>For that, locate the Sitecore LogFileAppender in web.config and change it's priority to DEBUG:</p>
+<pre>
+    <root>
+      <priority value="DEBUG"/>
+      <appender-ref ref="LogFileAppender"/>
+    </root>
+</pre>
+<p>This will enable query tracing, which you can then paste into Luke to test the query.</p>
+<p>Overall, when querying, you have to adhere to Lucene's rules. For example, you can have only one search parameter with MustNot condition, etc.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/sitecorian">sitecorian</a></p>

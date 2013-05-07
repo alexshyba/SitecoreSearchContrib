@@ -6,13 +6,41 @@ path: /sitecore/content/Demo/Home/Products/Apple iPhone 5
 parent: {37CDA3AB-7CE0-46E4-9B29-B918FD2E4E56}
 name: Apple iPhone 5
 master: {00000000-0000-0000-0000-000000000000}
-template: {3FE46250-BF73-47A2-A4EE-F6CD534B5E98}
-templatekey: Product
+template: {1370EB95-810A-4DEA-9C1C-C8B33E40EA35}
+templatekey: Cellphone
 
+----field----
+field: {940B2DFF-99EA-402E-A7C3-0765334F3185}
+name: Standard
+key: standard
+content-length: 3
+
+GSM
+----field----
+field: {A1B9F101-8C24-4C67-823D-68526FBFBD66}
+name: Brand
+key: brand
+content-length: 38
+
+{11438547-9702-4137-A610-9E1A5A2B4CE3}
+----field----
+field: {EA408CEA-52F2-4999-A8F1-DD8CA838B0DE}
+name: Market
+key: market
+content-length: 38
+
+{50090689-AD6F-4978-9CBA-C620F4A14269}
+----field----
+field: {035CBBE5-6C49-402B-B884-080783C3F9EB}
+name: MadeIn
+key: madein
+content-length: 38
+
+{4FA09B11-A6D2-4301-B6C0-968CCA8C692F}
 ----version----
 language: en
 version: 1
-revision: ac2d79b8-cfc5-464a-8af2-c64c26b7835b
+revision: 738ffdeb-d8ff-4a83-bbfb-aa07668d124b
 
 ----field----
 field: {01C3535C-919E-4FE4-A014-D08780FF63E0}
@@ -43,20 +71,6 @@ content-length: 3
 
 150
 ----field----
-field: {A1B9F101-8C24-4C67-823D-68526FBFBD66}
-name: Brand
-key: brand
-content-length: 38
-
-{11438547-9702-4137-A610-9E1A5A2B4CE3}
-----field----
-field: {EA408CEA-52F2-4999-A8F1-DD8CA838B0DE}
-name: Market
-key: market
-content-length: 38
-
-{50090689-AD6F-4978-9CBA-C620F4A14269}
-----field----
 field: {D8B1A83A-1597-4694-BE08-24EF59A4F1C5}
 name: RelatedProducts
 key: relatedproducts
@@ -69,21 +83,14 @@ name: Created
 key: created
 content-length: 15
 
-20110809T160200
+20110809T000000
 ----field----
 field: {198038A2-ECC9-4A76-A6D9-FA3D7A38B77A}
 name: Released
 key: released
 content-length: 15
 
-20120812T160200
-----field----
-field: {035CBBE5-6C49-402B-B884-080783C3F9EB}
-name: Country
-key: country
-content-length: 38
-
-{4FA09B11-A6D2-4301-B6C0-968CCA8C692F}
+20120812T000000
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
 name: __Created
@@ -92,19 +99,26 @@ content-length: 15
 
 20110812T160222
 ----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 18
+
+sitecore\Anonymous
+----field----
 field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
 name: __Revision
 key: __revision
 content-length: 36
 
-ac2d79b8-cfc5-464a-8af2-c64c26b7835b
+738ffdeb-d8ff-4a83-bbfb-aa07668d124b
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 34
 
-20111201T175421:634583588611551647
+20130504T153927:635032787678753020
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

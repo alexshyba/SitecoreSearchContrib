@@ -1,10 +1,10 @@
 ----item----
 version: 1
-id: {3FE46250-BF73-47A2-A4EE-F6CD534B5E98}
+id: {3AF80D80-404F-411F-9E72-F43A7D92AEC8}
 database: master
-path: /sitecore/templates/scSearch Samples/Product
+path: /sitecore/templates/scSearch Samples/Laptop
 parent: {2109FBF1-81BB-40CE-813B-E0E5413D4415}
-name: Product
+name: Laptop
 master: {00000000-0000-0000-0000-000000000000}
 template: {AB86861A-6030-46C5-B394-E8F99E8B87DB}
 templatekey: Template
@@ -15,40 +15,33 @@ name: __Base template
 key: __base template
 content-length: 38
 
-{1930BBEB-7805-471A-A3BE-4858AC7CF696}
+{3FE46250-BF73-47A2-A4EE-F6CD534B5E98}
 ----field----
 field: {F7D48A55-2158-4F02-9356-756654404F73}
 name: __Standard values
 key: __standard values
 content-length: 38
 
-{7E9AE464-47C8-45EF-B333-B2AD410CA714}
+{A00458E0-6450-441D-80D7-4AD71164EA82}
 ----field----
 field: {06D5295C-ED2F-4A54-9BF2-26228D113318}
 name: __Icon
 key: __icon
-content-length: 31
+content-length: 24
 
-Business/16x16/shoppingcart.png
+People/32x32/laptop2.png
 ----version----
 language: en
 version: 1
-revision: 7cf2c846-46a6-4f68-a93b-5188e5513880
+revision: fd4d9a46-30e3-4260-860e-d740ec4559bb
 
-----field----
-field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
-name: __Owner
-key: __owner
-content-length: 14
-
-sitecore\admin
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
 name: __Created
 key: __created
 content-length: 15
 
-20110812T155600
+20130504T153143
 ----field----
 field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
 name: __Created by
@@ -62,14 +55,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-7cf2c846-46a6-4f68-a93b-5188e5513880
+fd4d9a46-30e3-4260-860e-d740ec4559bb
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 34
 
-20130504T172417:635032850579119023
+20130504T153629:635032785893862878
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

@@ -1,54 +1,47 @@
 ----item----
 version: 1
-id: {F23C8C7D-9D7A-4D26-8744-38A07E77F826}
+id: {ACDC1A84-DA02-4592-931D-EC879A8B825A}
 database: master
-path: /sitecore/content/Demo/Lookups/Countries/Thailand
-parent: {0346B296-C398-4ADD-B112-32028EC7F18F}
-name: Thailand
+path: /sitecore/templates/scSearch Samples/Laptop/Laptop Data
+parent: {3AF80D80-404F-411F-9E72-F43A7D92AEC8}
+name: Laptop Data
 master: {00000000-0000-0000-0000-000000000000}
-template: {B4046887-D751-4410-9BA5-C5CD4AA666C5}
-templatekey: Lookup
+template: {E269FBB5-3750-427A-9149-7AA950B49301}
+templatekey: Template section
 
 ----version----
 language: en
 version: 1
-revision: 906f983d-5c1c-4c5c-90a0-463b6d157d04
+revision: 679d07c1-021e-4983-825c-068954508402
 
-----field----
-field: {152F5016-AA4B-417C-A9DF-164E1E493D29}
-name: Name
-key: name
-content-length: 8
-
-Thailand
 ----field----
 field: {25BED78C-4957-4165-998A-CA1B52F67497}
 name: __Created
 key: __created
 content-length: 15
 
-20111201T175353
+20130504T153629
 ----field----
 field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
 name: __Created by
 key: __created by
-content-length: 18
+content-length: 14
 
-sitecore\Anonymous
+sitecore\admin
 ----field----
 field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
 name: __Revision
 key: __revision
 content-length: 36
 
-906f983d-5c1c-4c5c-90a0-463b6d157d04
+679d07c1-021e-4983-825c-068954508402
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 34
 
-20111201T175353:634583588331793674
+20130504T153629:635032785893540422
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by

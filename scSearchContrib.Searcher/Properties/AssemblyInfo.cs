@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("scSearchContrib.Searcher")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Sitecore Search Contrib Searcher")]
+[assembly: AssemblyDescription("The searching/querying component of the Sitecore Search Contrib project")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sitecore")]
-[assembly: AssemblyProduct("scSearchContrib")]
+[assembly: AssemblyProduct("scSearchContribSearcher")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

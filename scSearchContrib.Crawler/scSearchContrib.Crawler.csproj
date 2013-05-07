@@ -114,6 +114,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Config\Include\scSearchContrib.Crawler.config.example">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App_Config\Include\scSearchContrib.Crawler.config">
       <SubType>Designer</SubType>
     </None>

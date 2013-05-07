@@ -1,0 +1,105 @@
+<configuration xmlns:x="http://www.sitecore.net/xmlconfig/">
+    <sitecore>
+        <databases>
+            <database id="web" singleInstance="true" type="Sitecore.Data.Database, Sitecore.Kernel">
+                <Engines.HistoryEngine.Storage>
+                    <obj type="Sitecore.Data.$(database).$(database)HistoryStorage, Sitecore.Kernel">
+                        <param connectionStringName="$(id)" />
+                        <EntryLifeTime>30.00:00:00</EntryLifeTime>
+                    </obj>
+                </Engines.HistoryEngine.Storage>
+                <Engines.HistoryEngine.SaveDotNetCallStack>false</Engines.HistoryEngine.SaveDotNetCallStack>
+            </database>
+        </databases>
+        <search>
+            <configuration>
+                <indexes>
+                    <index id="demo" type="Sitecore.Search.Index, Sitecore.Kernel">
+                        <param desc="name">$(id)</param>
+                        <param desc="folder">$(id)</param>
+                        <Analyzer ref="search/analyzer" />
+                        <locations hint="list:AddCrawler">
+                            <!-- The crawler configuration is shared and moved outside -->
+                            <master ref="search/crawlers/demo" param1="master" />
+                            <web ref="search/crawlers/demo" param1="web" />
+                        </locations>
+                    </index>
+                </indexes>
+            </configuration>
+            <crawlers>
+                <demo type="scSearchContrib.Crawler.Crawlers.AdvancedDatabaseCrawler,scSearchContrib.Crawler">
+                    <Database>$(1)</Database>
+                    <Root>/sitecore/content</Root>
+                    <IndexAllFields>true</IndexAllFields>
+
+                    <!-- INCLUDE TEMPLATE FILTER
+                             if this filter used, only items based on these templates specified here will be indexed
+                             make sure to add templates GUIDs here with unique xml element <name /> -->
+                    <!-- <include hint="list:IncludeTemplate">
+                                <uniqueTemplateToken1>{GUID}</uniqueTemplateToken1>
+                             </include> -->
+
+                    <!-- EXCLUDE TEMPLATE FILTER
+                             use this filter to ignore items created from specific templates
+                             make sure to add templates GUIDs here with unique xml element <name /> -->
+                    <!-- <include hint="list:ExcludeTemplate">
+                                <uniqueTemplateToken1>{GUID}</uniqueTemplateToken1>
+                             </include>-->
+
+                    <!-- INCLUDE FIELD FILTER
+                             if this filter used, only these fields will be added to the index.
+                             make sure to add field GUIDs here with unique xml element <name /> -->
+                    <!-- <include hint="list:IncludeField">
+                                 <uniqueFieldToken1>{GUID}</uniqueFieldToken1>
+                             </include>-->
+
+                    <!-- EXCLUDE TEMPLATE FILTER
+                             use this filter to ignore specific fields from being indexed
+                             make sure to add field GUIDs here with unique xml element <name /> -->
+                    <!-- <include hint="list:ExcludeField">
+                                <__revision>{8CDC337E-A112-42FB-BBB4-4143751E123F}</__revision>
+                                <__contextmenu>{D3AE7222-425D-4B77-95D8-EE33AC2B6730}</__contextmenu>
+                                <__security>{DEC8D2D5-E3CF-48B6-A653-8E69E2716641}</__security>
+                                <__renderings>{F1A1FE9E-A60C-4DDB-A3A0-BB5B29FE732E}</__renderings>
+                            </include> -->
+
+                    <!-- FIELD CRAWLERS
+                             define logic of how each field is crawled per field type -->
+                    <fieldCrawlers hint="raw:AddFieldCrawlers">
+                        <fieldCrawler type="scSearchContrib.Crawler.FieldCrawlers.LookupFieldCrawler,scSearchContrib.Crawler" fieldType="Droplink" />
+                        <fieldCrawler type="scSearchContrib.Crawler.FieldCrawlers.LookupFieldCrawler,scSearchContrib.Crawler" fieldType="Droptree" />
+                        <fieldCrawler type="scSearchContrib.Crawler.FieldCrawlers.DateFieldCrawler,scSearchContrib.Crawler" fieldType="Datetime" />
+                        <fieldCrawler type="scSearchContrib.Crawler.FieldCrawlers.DateFieldCrawler,scSearchContrib.Crawler" fieldType="Date" />
+                        <fieldCrawler type="scSearchContrib.Crawler.FieldCrawlers.NumberFieldCrawler,scSearchContrib.Crawler" fieldType="Number" />
+                        <fieldCrawler type="scSearchContrib.Crawler.FieldCrawlers.MultilistFieldCrawler,scSearchContrib.Crawler" fieldType="Multilist" />
+                        <fieldCrawler type="scSearchContrib.Crawler.FieldCrawlers.MultilistFieldCrawler,scSearchContrib.Crawler" fieldType="Treelist" />
+                        <fieldCrawler type="scSearchContrib.Crawler.FieldCrawlers.MultilistFieldCrawler,scSearchContrib.Crawler" fieldType="TreelistEx" />
+                        <fieldCrawler type="scSearchContrib.Crawler.FieldCrawlers.MultilistFieldCrawler,scSearchContrib.Crawler" fieldType="Checklist" />
+                    </fieldCrawlers>
+
+                    <!-- DYNAMIC FIELDS
+                             a set of computed fields to be added to your index
+                             this can significally slow down the indexing process -->
+                    <dynamicFields hint="raw:AddDynamicFields">
+                        <dynamicField type="scSearchContrib.Crawler.DynamicFields.AllTemplatesField,scSearchContrib.Crawler" name="_alltemplates" storageType="NO" indexType="TOKENIZED" vectorType="NO" boost="1f" />
+                    </dynamicFields>
+
+                    <!-- FIELD TYPE INDEXING SETTINGS
+                             defines how each field is stored/unstored, tokenized/untokenized, boosted, etc. per field type
+                             if a field type is not defined:
+                             defaults of storageType="NO", indexType="UN_TOKENIZED" vectorType="NO" boost="1f" are applied -->
+                    <fieldTypes hint="raw:AddFieldTypes">
+                        <!-- Text fields need to be tokenized -->
+                        <fieldType name="single-line text" storageType="NO" indexType="TOKENIZED" vectorType="NO" boost="1f" />
+                        <fieldType name="multi-line text" storageType="NO" indexType="TOKENIZED" vectorType="NO" boost="1f" />
+                        <fieldType name="word document" storageType="NO" indexType="TOKENIZED" vectorType="NO" boost="1f" />
+                        <fieldType name="html" storageType="NO" indexType="TOKENIZED" vectorType="NO" boost="1f" />
+                        <fieldType name="rich text" storageType="NO" indexType="TOKENIZED" vectorType="NO" boost="1f" />
+                        <fieldType name="memo" storageType="NO" indexType="TOKENIZED" vectorType="NO" boost="1f" />
+                        <fieldType name="text" storageType="NO" indexType="TOKENIZED" vectorType="NO" boost="1f" />
+                    </fieldTypes>
+                </demo>
+            </crawlers>
+        </search>
+    </sitecore>
+</configuration>

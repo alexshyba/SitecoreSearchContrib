@@ -1,39 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
     <title>Sitecore Search Contrib by sitecorian</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
-
-    <header>
-      <div class="container">
+    <div class="wrapper">
+      <header>
         <h1>Sitecore Search Contrib</h1>
-        <h2>Extension to Sitecore.Search namespace. Includes AdvancedDatabaseCrawler and Searcher.</h2>
+        <p>Extension to Sitecore.Search namespace. Includes AdvancedDatabaseCrawler and Searcher.</p>
 
-        <section id="downloads">
-          <a href="https://github.com/sitecorian/SitecoreSearchContrib/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/sitecorian/SitecoreSearchContrib/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/sitecorian/SitecoreSearchContrib" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+        <p class="view"><a href="https://github.com/sitecorian/SitecoreSearchContrib">View the Project on GitHub <small>sitecorian/SitecoreSearchContrib</small></a></p>
 
-    <div class="container">
-      <section id="main_content">
+
+        <ul>
+          <li><a href="https://github.com/sitecorian/SitecoreSearchContrib/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/sitecorian/SitecoreSearchContrib/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/sitecorian/SitecoreSearchContrib">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
         <h1>What's this?</h1>
 
 <p>This project consists of different moving parts which can be used separately from each other.
 It's important to know that the project does not <em>change</em> the way Sitecore indexes items, it simply <em>extends</em> the crawling mechanism to be more flexible and provides alternative search API on top of existing <strong>Sitecore.Search</strong> namespace.</p>
 
-<h2>Crawler project</h2>
+<h2>1. Crawler project</h2>
 
 <p>This project provides an extension to the standard <strong>Sitecore.Search.DatabaseCrawler</strong>:</p>
 
@@ -43,20 +43,20 @@ It's important to know that the project does not <em>change</em> the way Sitecor
 <li>field crawling factory</li>
 <li>field crawling rules per field type</li>
 <li>other misc tweaks.</li>
-</ul><h2>Searcher project</h2>
+</ul><h2>2. Searcher project</h2>
 
 <p>An extension to Sitecore.Search API, providing a more verbose, non-Lucene specific, querying mechanism such as FieldQuery, NumericRangeQuery, DateRangeQuery, MultiFieldQuery, etc.</p>
 
-<h2>Demo projects</h2>
+<h2>3. Demo projects</h2>
 
 <p>Demonstrates the usage of different search parameters. Includes a set of demo pages for you to explore and learn. There are also serialization items to go with the demo pages, along with other demo extensions. As the name suggests, all demo projects are completely optional and shouldn't be deployed to production.</p>
 
-<h2>Tools project</h2>
+<h2>4. Tools project</h2>
 
 <p>Contains two elements. A very simple .aspx page allowing you to rebuild a search index. You can deploy it to a secure location on your production server and use it without the full access to Sitecore shell.
 The other element is the customized Index Rebuild wizard available from the Control Panel. If you are using a version earlier than 6.5.0 rev. 120706, this wizard does not see any of the Sitecore.Search indexes. This customization solves that.</p>
 
-<h2>What do I need to deploy?</h2>
+<h1>What do I need to deploy?</h1>
 
 <p>These are building blocks. So it's completely up to you. You can use Crawler &amp; Searcher &amp; Tools together in production, while deploy everything to a dev workstation. It does not make sense to use the Searcher project separately from Crawler, as things like numeric ranges and date ranges won't work without the field crawlers provided by the latter. You can use the Crawler and rely on standard Sitecore.Search querying APIs though.</p>
 
@@ -94,8 +94,12 @@ Alternatively, run Control Panel -&gt; Rebuild the Search Index -&gt; "demo".</p
 <p>Please, make sure to check the Troubleshooting page first.
 If this does not help, then <a href="https://github.com/sitecorian/SitecoreSearchContrib/issues">submit an issue here.</a></p>
       </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/sitecorian">sitecorian</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-
+    <script src="javascripts/scale.fix.js"></script>
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

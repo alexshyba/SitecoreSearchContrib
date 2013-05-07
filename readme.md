@@ -8,7 +8,7 @@ If you have any issues, please submit it here.
    - Lucene.Net.dll
    - Sitecore.Client.dll
    - Sitecore.Kernel.dll
-   
+
 2. Open both webroot_path.txt and serialization_path.txt and adjust the path accordingly.
 
 3. Open the project -> Build Solution.

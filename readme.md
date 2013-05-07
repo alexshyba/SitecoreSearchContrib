@@ -8,22 +8,21 @@ If you have any issues, please submit it here.
    - Lucene.Net.dll
    - Sitecore.Client.dll
    - Sitecore.Kernel.dll
-
-2. Open both webroot_path.txt and serialization_path.txt and adjust the path accordingly.
-
-3. Open the project -> Build Solution.
+<br/>
+2. Open both webroot_path.txt and serialization_path.txt and adjust the path accordingly.<br/>
+3. Open the project -> Build Solution.<br/>
    If you do not want the demo stuff, adjust your Build Configuration accordingly.
+<h3>If you want the demo stuff</h3>
 
-If you want the demo stuff:
+1. http://localhost/sitecore/admin/serialization.aspx -> toggle "master" -> Update {master}.
 
-4. http://localhost/sitecore/admin/serialization.aspx -> toggle "master" -> Update {master}.
+2. Sitecore -> Publish Site -> Smart Publish.
 
-5. Sitecore -> Publish Site -> Smart Publish.
+3. Control Panel -> Database -> Rebuild the Links Database (core, master, web).
 
-6. Control Panel -> Database -> Rebuild the Links Database (core, master, web).
-
-7. Launch http://localhost/scripts/indexrebuilder.aspx and toggle "demo" rebuild.
+4. Launch http://localhost/scripts/indexrebuilder.aspx and toggle "demo" rebuild.
    Alternatively, run Control Panel -> Rebuild the Search Index -> "demo".
 
-8. Launch http://localhost/sitecore modules/web/searchdemo/
-9. Enjoy!
+5. Launch http://localhost/sitecore modules/web/searchdemo/
+
+6. Enjoy!

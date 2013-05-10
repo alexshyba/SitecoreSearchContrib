@@ -1,12 +1,11 @@
-﻿using System.Web.UI.WebControls;
-using SearchDemo.Scripts;
-using scSearchContrib.Searcher;
-using scSearchContrib.Searcher.Parameters;
-using System.Collections.Generic;
-
-namespace scSearchContrib.Demo
+﻿namespace scSearchContrib.Demo
 {
-    public partial class RelationSearchDemoPage : BaseDemoPage
+  using System.Collections.Generic;
+
+  using scSearchContrib.Searcher;
+  using scSearchContrib.Searcher.Parameters;
+
+  public partial class RelationSearchDemoPage : BaseDemoPage
     {
         protected string RelationFilter
         {
@@ -17,6 +16,7 @@ namespace scSearchContrib.Demo
                                                   string indexName,
                                                   string language,
                                                   string templateFilter,
+                                                  bool searchBaseTemplates,
                                                   string locationFilter,
                                                   string fullTextQuery)
         {
@@ -26,6 +26,7 @@ namespace scSearchContrib.Demo
                 Language = language,
                 RelatedIds = RelationFilter,
                 TemplateIds = templateFilter,
+                SearchBaseTemplates = searchBaseTemplates,
                 LocationIds = locationFilter,
                 FullTextQuery = fullTextQuery
             };

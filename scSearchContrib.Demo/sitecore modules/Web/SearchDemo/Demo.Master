@@ -38,6 +38,10 @@
                                 <asp:DropDownList ID="LanguageList" ClientIDMode="Static" CssClass="input-xlarge" runat="server" />
                                 <label>Template(s):</label>
                                 <asp:TextBox ID="TemplateFilterTextBox" TextMode="MultiLine" placeholder="One more more GUIDs (pipe separated)" CssClass="input-xlarge" runat="server" />
+                                <label class="checkbox">
+                                    <input type="checkbox" id="SearchBaseTemplatesCheckbox" checked="False" runat="server" />
+                                    Search Base Templates
+                                </label>
                                 <label>Full Text Query:</label>
                                 <asp:TextBox ID="FullTextQueryTextBox" placeholder="full text query" CssClass="input-xlarge" runat="server" />
                                 <asp:ContentPlaceHolder ID="mainPH" runat="server" />

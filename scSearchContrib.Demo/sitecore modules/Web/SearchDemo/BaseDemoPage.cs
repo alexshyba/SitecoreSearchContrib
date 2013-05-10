@@ -24,6 +24,6 @@ namespace scSearchContrib.Demo
          }
       }
 
-      public abstract List<SkinnyItem> GetItems(string databaseName, string indexName, string language, string templateFilter, string locationFilter, string fullTextQuery);
+      public abstract List<SkinnyItem> GetItems(string databaseName, string indexName, string language, string templateFilter, bool searchBaseTemplates, string locationFilter, string fullTextQuery);
    }
 }

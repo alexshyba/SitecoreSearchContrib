@@ -84,11 +84,13 @@
             var translator = new QueryTranslator(index);
             Assert.IsNotNull(translator, "Query Translator");
 
+            var templateFieldName = this.SearchBaseTemplates ? SearchFieldIDs.AllTemplates : this.TemplateIds;
+
             var queries = new List<Query>
                               {
                                   QueryBuilder.BuildFullTextQuery(this.FullTextQuery, index),
                                   QueryBuilder.BuildRelationFilter(this.RelatedIds),
-                                  QueryBuilder.BuildTemplateQuery(this.TemplateIds),
+                                  QueryBuilder.BuildIdFilter(templateFieldName, this.TemplateIds),
                                   QueryBuilder.BuildLocationFilter(this.LocationIds),
                                   QueryBuilder.BuildFieldQuery(BuiltinFields.Database, this.Database),
                                   QueryBuilder.BuildLanguageQuery(this.Language)

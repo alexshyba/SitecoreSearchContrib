@@ -15,6 +15,7 @@ namespace scSearchContrib.Demo
                                                   string indexName,
                                                   string language,
                                                   string templateFilter,
+                                                  bool searchBaseTemplates,
                                                   string locationFilter,
                                                   string fullTextQuery)
         {
@@ -24,7 +25,8 @@ namespace scSearchContrib.Demo
                                       Language = language,
                                       TemplateIds = templateFilter,
                                       LocationIds = locationFilter,
-                                      FullTextQuery = fullTextQuery
+                                      FullTextQuery = fullTextQuery,
+                                      SearchBaseTemplates = searchBaseTemplates
                                   };
 
             using (var runner = new QueryRunner(indexName))

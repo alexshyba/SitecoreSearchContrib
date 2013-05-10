@@ -35,15 +35,17 @@ namespace scSearchContrib.Demo
                                                 string indexName,
                                                 string language,
                                                 string templateFilter,
+                                                bool searchBaseTemplates,
                                                 string locationFilter,
                                                 string fullTextQuery)
       {
          var searchParam = new DateRangeSearchParam
                               {
                                  Database = databaseName,
-                                 Ranges = DateRanges,
+                                 Ranges = this.DateRanges,
                                  LocationIds = locationFilter,
                                  TemplateIds = templateFilter,
+                                 SearchBaseTemplates = searchBaseTemplates,
                                  FullTextQuery = fullTextQuery,
                                  InnerCondition = GetCondition(InnerDateRangeConditionList),
                                  Language = language

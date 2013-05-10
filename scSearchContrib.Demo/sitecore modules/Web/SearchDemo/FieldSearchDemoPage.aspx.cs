@@ -13,13 +13,10 @@ namespace scSearchContrib.Demo
                                                   string indexName,
                                                   string language,
                                                   string templateFilter,
+                                                  bool searchBaseTemplates,
                                                   string locationFilter,
                                                   string fullTextQuery)
         {
-
-            //Assert.IsNotNullOrEmpty(this.FieldName.Text, "Field name");
-            //Assert.IsNotNullOrEmpty(this.FieldValue.Text, "Field name");
-
             var searchParam = new FieldSearchParam
             {
                 Database = databaseName,
@@ -27,6 +24,7 @@ namespace scSearchContrib.Demo
                 FieldName = this.FieldName.Text,
                 FieldValue = this.FieldValue.Text,
                 TemplateIds = templateFilter,
+                SearchBaseTemplates = searchBaseTemplates,
                 LocationIds = locationFilter,
                 FullTextQuery = fullTextQuery,
                 Partial = this.Partial.Checked

@@ -145,7 +145,7 @@
             return innerQuery;
         }
 
-        private static Query BuildIdFilter(string fieldName, string ids)
+        public static Query BuildIdFilter(string fieldName, string ids)
         {
             if (string.IsNullOrEmpty(ids))
             {

@@ -49,11 +49,12 @@ namespace scSearchContrib.Demo
         }
 
         public override List<SkinnyItem> GetItems(string databaseName,
-                                                 string indexName,
-                                                 string language,
-                                                 string templateFilter,
-                                                 string locationFilter,
-                                                 string fullTextQuery)
+                                                  string indexName,
+                                                  string language,
+                                                  string templateFilter,
+                                                  bool searchBaseTemplates,
+                                                  string locationFilter,
+                                                  string fullTextQuery)
         {
             var baseCondition = GetCondition(this.BaseConditionList);
             var outerNumParamParamCondition = GetCondition(this.InnerNumericRangeConditionList);
@@ -68,6 +69,7 @@ namespace scSearchContrib.Demo
                                              Database = databaseName,
                                              LocationIds = locationFilter,
                                              TemplateIds = templateFilter,
+                                             SearchBaseTemplates = searchBaseTemplates,
                                              FullTextQuery = fullTextQuery,
                                              Language = language,
                                              Condition = baseCondition

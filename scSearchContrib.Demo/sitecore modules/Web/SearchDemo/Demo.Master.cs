@@ -218,12 +218,13 @@
             {
                 cache.Clear();
             }
+
             Response.Write("All caches cleared!");
         }
 
         protected virtual List<SkinnyItem> GetItems()
         {
-            return ((BaseDemoPage)mainPH.Page).GetItems(DatabaseName, IndexName, Language, TemplateFilter, LocationFilter, FullTextQuery);
+            return ((BaseDemoPage)mainPH.Page).GetItems(DatabaseName, IndexName, Language, TemplateFilter, SearchBaseTemplatesCheckbox.Checked, LocationFilter, FullTextQuery);
         }
     }
 }

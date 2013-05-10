@@ -25,6 +25,7 @@ namespace scSearchContrib.Demo
                                                   string indexName,
                                                   string language,
                                                   string templateFilter,
+                                                  bool searchBaseTemplates,
                                                   string locationFilter,
                                                   string fullTextQuery)
         {
@@ -37,6 +38,7 @@ namespace scSearchContrib.Demo
                                      InnerCondition = GetCondition(ConditionList),
                                      LocationIds = locationFilter,
                                      TemplateIds = templateFilter,
+                                     SearchBaseTemplates = searchBaseTemplates,
                                      FullTextQuery = fullTextQuery,
                                      Language = language
                                  };

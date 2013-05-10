@@ -84,7 +84,7 @@
             var translator = new QueryTranslator(index);
             Assert.IsNotNull(translator, "Query Translator");
 
-            var templateFieldName = this.SearchBaseTemplates ? SearchFieldIDs.AllTemplates : this.TemplateIds;
+            var templateFieldName = this.SearchBaseTemplates ? SearchFieldIDs.AllTemplates : BuiltinFields.Template;
 
             var queries = new List<Query>
                               {

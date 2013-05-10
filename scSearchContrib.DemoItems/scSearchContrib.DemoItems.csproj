@@ -47,7 +47,9 @@
     <None Include="master\sitecore\content\Demo\Home\Products.item" />
     <None Include="master\sitecore\content\Demo\Home\Products\Apple iPhone 4.item" />
     <None Include="master\sitecore\content\Demo\Home\Products\Apple iPhone 4S.item" />
+    <None Include="master\sitecore\content\Demo\Home\Products\Apple iPhone 5 Verizon.item" />
     <None Include="master\sitecore\content\Demo\Home\Products\Apple iPhone 5.item" />
+    <None Include="master\sitecore\content\Demo\Home\Products\Apple iPhone 5S.item" />
     <None Include="master\sitecore\content\Demo\Home\Products\Dell Latitude 6631.item" />
     <None Include="master\sitecore\content\Demo\Home\Products\Dell Precision 4333.item" />
     <None Include="master\sitecore\content\Demo\Home\Products\HTC Evo.item" />
@@ -68,6 +70,13 @@
     <None Include="master\sitecore\content\Demo\Lookups\Markets\North America.item" />
     <None Include="master\sitecore\content\Demo\Lookups\Markets\Western Europe.item" />
     <None Include="master\sitecore\templates\scSearch Samples.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Cellphone.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Cellphone\Cellphone Data.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Cellphone\Cellphone Data\Standard.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Laptop.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Laptop\Laptop Data.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Laptop\Laptop Data\Screen.item" />
+    <None Include="master\sitecore\templates\scSearch Samples\Laptop\__Standard Values.item" />
     <None Include="master\sitecore\templates\scSearch Samples\Lookup.item" />
     <None Include="master\sitecore\templates\scSearch Samples\Lookup\Data.item" />
     <None Include="master\sitecore\templates\scSearch Samples\Lookup\Data\Name.item" />
@@ -95,7 +104,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
   <Target Name="AfterBuild">
     <CallTarget Targets="DeployToWeb" Condition="Exists('..\serialization_path.txt')" />
   </Target>

@@ -59,14 +59,14 @@ namespace scSearchContrib.Profiler.UI
 		{
 			var type = typeof(LuceneProfiler);
 			Page.ClientScript.RegisterClientScriptInclude(type, "jquery-1.4.2", "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js");
-			Page.ClientScript.RegisterClientScriptResource(type, "scSearchContrib.Searcher.Profiler.UI.Resources.LuceneProfiler.js");	// embedded resourece
+			Page.ClientScript.RegisterClientScriptResource(type, "scSearchContrib.Profiler.UI.Resources.LuceneProfiler.js");	// embedded resourece
 			Page.ClientScript.RegisterClientScriptInclude(type, "jquery.templates", "http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js");
 		}
 
 		private void IncludeCss()
 		{
 			string cssTemplate = "<link rel='stylesheet' text='text/css' href='{0}' />";
-			string cssLocation = Page.ClientScript.GetWebResourceUrl(this.GetType(), "scSearchContrib.Searcher.Profiler.UI.Resources.LuceneProfiler.css");	// embedded resourece
+			string cssLocation = Page.ClientScript.GetWebResourceUrl(this.GetType(), "scSearchContrib.Profiler.UI.Resources.LuceneProfiler.css");	// embedded resourece
 			var include = new LiteralControl(String.Format(cssTemplate, cssLocation));
 
 			if (Page.Header != null)
@@ -82,7 +82,7 @@ namespace scSearchContrib.Profiler.UI
 		private static string GetTraceTemplate()
 		{
 			string template = string.Empty;
-			using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("scSearchContrib.Searcher.Profiler.UI.Resources.TraceTemplate.html"))
+			using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("scSearchContrib.Profiler.UI.Resources.TraceTemplate.html"))
 				if (stream != null)
 				{
 					using (var reader = new StreamReader(stream))

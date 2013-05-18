@@ -3,19 +3,18 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Web.UI;
 
-//[assembly: WebResource("scSearchContrib.Searcher.Profiler.UI.Resources.LuceneProfiler.js","application/x-javascript")]
-[assembly: WebResource("scSearchContrib.Searcher.Profiler.UI.Resources.LuceneProfiler.js", "text/javascript")]
-[assembly: WebResource("scSearchContrib.Searcher.Profiler.UI.Resources.LuceneProfiler.css", "text/css", PerformSubstitution = true)]
-[assembly: WebResource("scSearchContrib.Searcher.Profiler.UI.Resources.TraceTemplate.html", "application/text")]
+[assembly: WebResource("scSearchContrib.Profiler.UI.Resources.LuceneProfiler.js", "text/javascript")]
+[assembly: WebResource("scSearchContrib.Profiler.UI.Resources.LuceneProfiler.css", "text/css", PerformSubstitution = true)]
+[assembly: WebResource("scSearchContrib.Profiler.UI.Resources.TraceTemplate.html", "application/text")]
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("scSearchContrib.Searcher.Profiler")]
+[assembly: AssemblyTitle("scSearchContrib.Profiler")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("scSearchContrib.Searcher.Profiler")]
+[assembly: AssemblyProduct("scSearchContrib.Profiler")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

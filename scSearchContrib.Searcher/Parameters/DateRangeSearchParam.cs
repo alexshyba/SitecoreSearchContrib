@@ -37,7 +37,7 @@
             #endregion Properties
         }
 
-        public List<DateRange> Ranges { get; set; }
+        public IEnumerable<DateRange> Ranges { get; set; }
 
         protected override Query BuildQuery(BooleanClause.Occur condition)
         {

@@ -20,7 +20,7 @@
             Refinements = new List<Refinement>();
         }
 
-        public List<Refinement> Refinements { get; set; }
+        public IEnumerable<Refinement> Refinements { get; set; }
 
         protected override Query BuildQuery(BooleanClause.Occur innerCondition)
         {

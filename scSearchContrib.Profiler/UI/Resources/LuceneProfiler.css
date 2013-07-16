@@ -1,0 +1,27 @@
+﻿#traceContainer { 
+    z-index: 2147483641;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    padding: 5px 10px;
+    text-align: left;
+    line-height: 18px;
+    overflow: auto;
+    box-shadow: 0px 1px 15px #555;
+    top: 5px;
+    max-height: 853px;
+    left: 5px;
+    display: block;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-family: Helvetica,Arial,sans-serif;
+    font: 81.25%/1.333333333333333 Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    display: block;
+    border-collapse: collapse;
+}
+
+#lnkToggleView, .traceButton					{ padding-right: 5px; color: #f2661b; text-decoration: none; }
+table#traceTable tbody tr:nth-child(even) td	{ border: 1px solid #ccc; padding: .5em; border-collapse: collapse; white-space: nowrap; background-color: #ecede8; font-size: 10px; }
+table#traceTable td, th							{ border: 1px solid #ccc; padding: .5em; border-collapse: collapse; white-space: nowrap; font-size: 10px; }
+table#traceTable table							{ border-collapse: collapse; white-space: nowrap; line-height: 1.3em; font-size: 10px; }

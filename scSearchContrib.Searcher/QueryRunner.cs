@@ -11,7 +11,6 @@
 
     using Sitecore.Diagnostics;
     using Sitecore.Search;
-    using Sitecore.StringExtensions;
 
     public class QueryRunner : IDisposable
     {
@@ -62,6 +61,15 @@
 
         public virtual List<SkinnyItem> RunQuery(Query query, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
         {
+            Sort sort = null;
+            if (!string.IsNullOrEmpty(sortField))
+                sort = new Sort(new SortField(sortField.ToLowerInvariant(), SortField.STRING, reverse));
+
+            return RunQuery(query, showAllVersions, sort, start, end, out totalResults);
+        }
+
+        public virtual List<SkinnyItem> RunQuery(Query query, bool showAllVersions, Sort sorter, int start, int end, out int totalResults)
+        {
             Assert.ArgumentNotNull(Index, "Index");
 
             var items = new List<SkinnyItem>();
@@ -79,11 +87,9 @@
                 {
                     Log.Debug(string.Format("SitecoreSearchContrib: Executing query: {0}", query));
                     SearchHits searchhits;
-                    if (!sortField.IsNullOrEmpty())
+                    if (sorter != null)
                     {
-                        // type hardcoded to 3 - means sorting as string
-                        var sort = new Sort(new SortField(sortField, 3, reverse));
-                        var hits = context.Searcher.Search(query, sort);
+                        var hits = context.Searcher.Search(query, sorter);
                         searchhits = new SearchHits(hits);
                     }
                     else
@@ -157,6 +163,15 @@
 
         public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, QueryOccurance innerCondition, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
         {
+            Sort sort = null;
+            if (!string.IsNullOrEmpty(sortField.ToLowerInvariant()))
+                sort = new Sort(new SortField(sortField, SortField.STRING, reverse));
+
+            return GetItems(parameters, innerCondition, showAllVersions, sort, start, end, out totalResults);
+        }
+
+        public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, QueryOccurance innerCondition, bool showAllVersions, Sort sorter, int start, int end, out int totalResults)
+        {
             Assert.IsNotNull(Index, "Index");
 
             var translator = new QueryTranslator(Index);
@@ -181,7 +196,7 @@
                 query.Add(nestedQuery, translator.GetOccur(parameter.Condition));
             }
 
-            return RunQuery(query, showAllVersions, sortField, reverse, start, end, out totalResults);
+            return RunQuery(query, showAllVersions, sorter, start, end, out totalResults);
         }
 
         public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, bool showAllVersions = false, string sortField = "", bool reverse = true, int start = 0, int end = 0)

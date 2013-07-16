@@ -37,7 +37,7 @@
             #endregion Properties
         }
 
-        public List<NumericRangeField> Ranges { get; set; }
+        public IEnumerable<NumericRangeField> Ranges { get; set; }
 
         protected override Query BuildQuery(BooleanClause.Occur condition)
         {

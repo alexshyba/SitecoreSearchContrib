@@ -7,35 +7,35 @@ using Field = Sitecore.Data.Fields.Field;
 
 namespace scSearchContrib.Crawler.FieldCrawlers
 {
-   /// <summary>
-   /// Defines a way to crawl date and datetime fields.
-   /// </summary>
-   public class DateFieldCrawler : FieldCrawlerBase
-   {
-      public DateFieldCrawler(Field field) : base(field) { }
+    /// <summary>
+    /// Defines a way to crawl date and datetime fields.
+    /// </summary>
+    public class DateFieldCrawler : FieldCrawlerBase
+    {
+        public DateFieldCrawler(Field field) : base(field) { }
 
-      /// <summary>
-      /// Returns date/datetime field value in yyyyMMddHHmmss format.
-      /// </summary>
-      /// <returns></returns>
-      public override string GetValue()
-      {
-         if (String.IsNullOrEmpty(_field.Value))
-         {
-            return DateTools.DateToString(DateTime.MinValue, DateTools.Resolution.DAY);
-         }
-
-         if (FieldTypeManager.GetField(_field) is DateField)
-         {
-            var dateField = new DateField(_field);
-
-            if(dateField.DateTime > DateTime.MinValue)
+        /// <summary>
+        /// Returns date/datetime field value in yyyyMMddHHmmss format.
+        /// </summary>
+        /// <returns></returns>
+        public override string GetValue()
+        {
+            if (String.IsNullOrEmpty(_field.Value))
             {
-               return DateTools.DateToString(dateField.DateTime, DateTools.Resolution.DAY);
+                return DateTools.DateToString(DateTime.MinValue, DateTools.Resolution.DAY);
             }
-         }
 
-         return String.Empty;
-      }
-   }
+            if (FieldTypeManager.GetField(_field) is DateField)
+            {
+                var dateField = new DateField(_field);
+
+                if (dateField.DateTime > DateTime.MinValue)
+                {
+                    return DateTools.DateToString(dateField.DateTime, DateTools.Resolution.DAY);
+                }
+            }
+
+            return String.Empty;
+        }
+    }
 }

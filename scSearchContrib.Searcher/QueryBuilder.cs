@@ -99,7 +99,7 @@
             return new TermQuery(new Term(fieldName.ToLowerInvariant(), fieldValue));
         }
 
-        public static Query BuildNumericRangeSearchParam(List<NumericRangeSearchParam.NumericRangeField> ranges, BooleanClause.Occur condition)
+        public static Query BuildNumericRangeSearchParam(IEnumerable<NumericRangeSearchParam.NumericRangeField> ranges, BooleanClause.Occur condition)
         {
             Assert.ArgumentNotNull(ranges, "Ranges");
 
@@ -108,9 +108,9 @@
                 return null;
             }
 
-            if (ranges.Count == 1)
+            if (ranges.Count() == 1)
             {
-                return BuildNumericRangeQuery(ranges[0]);
+                return BuildNumericRangeQuery(ranges.First());
             }
 
             var innerQuery = new BooleanQuery();
@@ -122,7 +122,7 @@
             return innerQuery;
         }
 
-        public static Query BuildDateRangeSearchParam(List<DateRangeSearchParam.DateRange> ranges, BooleanClause.Occur condition)
+        public static Query BuildDateRangeSearchParam(IEnumerable<DateRangeSearchParam.DateRange> ranges, BooleanClause.Occur condition)
         {
             Assert.ArgumentNotNull(ranges, "Ranges");
 
@@ -131,9 +131,9 @@
                 return null;
             }
 
-            if (ranges.Count == 1)
+            if (ranges.Count() == 1)
             {
-                return BuildDateRangeQuery(ranges[0]);
+                return BuildDateRangeQuery(ranges.First());
             }
 
             var innerQuery = new BooleanQuery();
@@ -192,7 +192,7 @@
             return new RangeQuery(startTerm, endTerm, true);
         }
 
-        public static Query BuildMultiFieldQuery(List<MultiFieldSearchParam.Refinement> refinements, BooleanClause.Occur condition)
+        public static Query BuildMultiFieldQuery(IEnumerable<MultiFieldSearchParam.Refinement> refinements, BooleanClause.Occur condition)
         {
             Assert.ArgumentNotNull(refinements, "Refinements");
 
@@ -201,9 +201,9 @@
                 return null;
             }
 
-            if (refinements.Count == 1)
+            if (refinements.Count() == 1)
             {
-                return BuildFieldQuery(refinements[0].Name, refinements[0].Value);
+                return BuildFieldQuery(refinements.First().Name, refinements.First().Value);
             }
 
             var innerQuery = new BooleanQuery();

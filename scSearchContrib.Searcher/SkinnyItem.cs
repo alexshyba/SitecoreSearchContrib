@@ -181,7 +181,7 @@
             var versionItem = db.GetItem(this.Uri.ToDataUri());
 
             // handling edge case when an item was published but not updated in the index
-            if (versionItem.Fields.Count > 0)
+            if (versionItem != null && versionItem.Fields.Count > 0)
             {
                 return versionItem;
             }

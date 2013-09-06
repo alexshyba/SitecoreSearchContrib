@@ -164,8 +164,8 @@
         public virtual List<SkinnyItem> GetItems(IEnumerable<SearchParam> parameters, QueryOccurance innerCondition, bool showAllVersions, string sortField, bool reverse, int start, int end, out int totalResults)
         {
             Sort sort = null;
-            if (!string.IsNullOrEmpty(sortField.ToLowerInvariant()))
-                sort = new Sort(new SortField(sortField, SortField.STRING, reverse));
+            if (!string.IsNullOrEmpty(sortField))
+                sort = new Sort(new SortField(sortField.ToLowerInvariant(), SortField.STRING, reverse));
 
             return GetItems(parameters, innerCondition, showAllVersions, sort, start, end, out totalResults);
         }

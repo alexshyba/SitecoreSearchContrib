@@ -124,7 +124,8 @@
 
          if (float.TryParse(boost, out boostReturn))
          {
-            Boost = boostReturn;
+             Boost = boostReturn;
+             return;
          }
 
          Boost = 1;

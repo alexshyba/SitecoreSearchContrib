@@ -2,7 +2,7 @@
 Please visit <a href="http://sitecorian.github.io/SitecoreSearchContrib/"> the project website </a> for more information.
 <h2>Compatibility</h2>
 The codebase is compatible with Sitecore 6.4.x and 6.5.x releases.
-It should also work with 6.6.0, however the code will build with warnings due to deprecated methods in Lucene 2.9. The code is expected to work though.
+It should also work with 6.6.0, however the code will build with warnings due to deprecated methods in Lucene 2.9.
 If you have any issues, please submit it here.
 <h2>How to build code and deploy the demo project</h2>
 1. Under the root of the repository, there is a folder called /references. Copy the following DLLs from your local Sitecore install in there:

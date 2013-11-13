@@ -60,7 +60,7 @@
                 if (uriField != null && !string.IsNullOrEmpty(uriField.StringValue()))
                 {
                     var itemUri = new ItemUri(uriField.StringValue());
-
+                    itemUri = new ItemUri(itemUri.ItemID, itemUri.Language, Sitecore.Data.Version.Latest, itemUri.DatabaseName);
                     var itemInfo = new SkinnyItem(itemUri);
 
                     foreach (Field field in result.Document.GetFields())

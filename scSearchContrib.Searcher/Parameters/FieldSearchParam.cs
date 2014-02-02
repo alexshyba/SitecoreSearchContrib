@@ -1,10 +1,8 @@
-﻿namespace scSearchContrib.Searcher.Parameters
+﻿using System.Linq;
+
+namespace scSearchContrib.Searcher.Parameters
 {
     using Lucene.Net.Search;
-
-    using scSearchContrib.Searcher.Utilities;
-
-    using Sitecore.Diagnostics;
     using Sitecore.Search;
 
     /// <summary>
@@ -39,28 +37,12 @@
         /// <returns>
         /// The <see cref="BooleanQuery"/>.
         /// </returns>
-        public override Query ProcessQuery(QueryOccurance condition, Index index)
+        public override IQueryable<SkinnyItem> ProcessQuery(IQueryable<SkinnyItem> query, QueryOccurance condition, Index index)
         {
-            Assert.ArgumentNotNull(index, "Index");
+            var baseQuery = base.ProcessQuery(query, condition, index);
 
-            var baseQuery = base.ProcessQuery(condition, index);
-
-            var translator = new QueryTranslator(index);
-            Assert.IsNotNull(translator, "translator");
-
-            var fieldQuery = this.Partial ? QueryBuilder.BuildPartialFieldValueClause(index, this.FieldName, this.FieldValue) :
-                                            QueryBuilder.BuildExactFieldValueClause(index, this.FieldName, this.FieldValue);
-
-            if (baseQuery == null)
-            {
-                return fieldQuery;
-            }
-
-            if (baseQuery is BooleanQuery)
-            {
-                var booleanQuery = baseQuery as BooleanQuery;
-                booleanQuery.Add(fieldQuery, translator.GetOccur(condition));
-            }
+            baseQuery = this.Partial ? baseQuery.Where(i => i[this.FieldName].Contains(this.FieldValue)) :
+                                       baseQuery.Where(i => i[this.FieldName] == this.FieldValue);
 
             return baseQuery;
         }

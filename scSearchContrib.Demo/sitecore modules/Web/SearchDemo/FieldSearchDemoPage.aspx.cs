@@ -1,6 +1,7 @@
 ﻿using scSearchContrib.Searcher;
 using scSearchContrib.Searcher.Parameters;
 using System.Collections.Generic;
+using Sitecore.Search;
 
 namespace scSearchContrib.Demo
 {

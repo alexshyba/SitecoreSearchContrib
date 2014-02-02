@@ -63,7 +63,8 @@
 
         private void InitializeList()
         {
-            IndexNameList.Items.Add("demo");
+            IndexNameList.Items.Add("sitecore_master_index");
+            IndexNameList.Items.Add("sitecore_web_index");
         }
 
         protected virtual void RunButton_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@
 
                 if (FullItemOutputCheckbox.Checked)
                 {
-                    var fullItems = SearchHelper.GetItemListFromInformationCollection(items);
+                    var fullItems = items.Select(i => i.GetItem());
                     stopwatch.Stop();
                     RenderItemDetails(fullItems);
                 }
@@ -120,13 +121,8 @@
                             resultLabel.Append("<li>");
                             resultLabel.Append(key);
                             resultLabel.Append(":<br/>");
-                            var values = skinnyItem.Fields.GetValues((string)key);
-                            if (values == null)
-                            {
-                                continue;
-                            }
 
-                            foreach (var value in values)
+                            foreach (var value in skinnyItem.Fields.Values)
                             {
                                 resultLabel.Append(value);
                                 resultLabel.Append("<br/>");

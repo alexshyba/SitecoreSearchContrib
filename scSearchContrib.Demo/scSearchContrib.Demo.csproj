@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>scSearchContrib.Demo</RootNamespace>
     <AssemblyName>scSearchContrib.Demo</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <TargetFrameworkProfile />
     <FileUpgradeFlags>
@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Lucene.Net">
@@ -74,20 +76,6 @@
     <Compile Include="sitecore modules\Web\SearchDemo\BaseDemoPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\ComboFieldSearchDemoPage.aspx.cs">
-      <DependentUpon>ComboFieldSearchDemoPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\ComboFieldSearchDemoPage.aspx.designer.cs">
-      <DependentUpon>ComboFieldSearchDemoPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\SortDemoPage.aspx.cs">
-      <DependentUpon>SortDemoPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\SortDemoPage.aspx.designer.cs">
-      <DependentUpon>SortDemoPage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="sitecore modules\Web\SearchDemo\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -101,13 +89,6 @@
     </Compile>
     <Compile Include="sitecore modules\Web\SearchDemo\FieldSearchDemoPage.aspx.designer.cs">
       <DependentUpon>FieldSearchDemoPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\ComboSearchDemoPage.aspx.cs">
-      <DependentUpon>ComboSearchDemoPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\ComboSearchDemoPage.aspx.designer.cs">
-      <DependentUpon>ComboSearchDemoPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="sitecore modules\Web\SearchDemo\Demo.Master.cs">
       <DependentUpon>Demo.Master</DependentUpon>
@@ -129,27 +110,6 @@
     </Compile>
     <Compile Include="sitecore modules\Web\SearchDemo\RelationSearchDemoPage.aspx.designer.cs">
       <DependentUpon>RelationSearchDemoPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\MultiFieldDemoPage.aspx.cs">
-      <DependentUpon>MultiFieldDemoPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\MultiFieldDemoPage.aspx.designer.cs">
-      <DependentUpon>MultiFieldDemoPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\NumericRangeDemoPage.aspx.cs">
-      <DependentUpon>NumericRangeDemoPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\NumericRangeDemoPage.aspx.designer.cs">
-      <DependentUpon>NumericRangeDemoPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\DateRangeDemoPage.aspx.cs">
-      <DependentUpon>DateRangeDemoPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sitecore modules\Web\SearchDemo\DateRangeDemoPage.aspx.designer.cs">
-      <DependentUpon>DateRangeDemoPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -178,7 +138,6 @@
     <Content Include="sitecore modules\Web\SearchDemo\css\ui-lightness\jquery-ui-1.10.3.custom.min.css" />
     <Content Include="sitecore modules\Web\SearchDemo\js\jquery-ui-1.10.3.custom.js" />
     <Content Include="sitecore modules\Web\SearchDemo\js\jquery-ui-1.10.3.custom.min.js" />
-    <Content Include="sitecore modules\Web\SearchDemo\ComboFieldSearchDemoPage.aspx" />
     <Content Include="sitecore modules\Web\SearchDemo\css\bootstrap-responsive.css" />
     <Content Include="sitecore modules\Web\SearchDemo\css\bootstrap-responsive.min.css" />
     <Content Include="sitecore modules\Web\SearchDemo\css\bootstrap.css" />
@@ -190,17 +149,12 @@
     <Content Include="sitecore modules\Web\SearchDemo\js\bootstrap.js" />
     <Content Include="sitecore modules\Web\SearchDemo\js\bootstrap.min.js" />
     <Content Include="sitecore modules\Web\SearchDemo\js\jquery-1.9.1.min.js" />
-    <Content Include="sitecore modules\Web\SearchDemo\SortDemoPage.aspx" />
     <Content Include="sitecore modules\Web\SearchDemo\Header.ascx" />
     <Content Include="sitecore modules\Web\SearchDemo\default.aspx" />
     <Content Include="sitecore modules\Web\SearchDemo\FieldSearchDemoPage.aspx" />
-    <Content Include="sitecore modules\Web\SearchDemo\ComboSearchDemoPage.aspx" />
     <Content Include="sitecore modules\Web\SearchDemo\Demo.css" />
     <Content Include="sitecore modules\Web\SearchDemo\BasicSearchDemoPage.aspx" />
     <Content Include="sitecore modules\Web\SearchDemo\RelationSearchDemoPage.aspx" />
-    <Content Include="sitecore modules\Web\SearchDemo\MultiFieldDemoPage.aspx" />
-    <Content Include="sitecore modules\Web\SearchDemo\NumericRangeDemoPage.aspx" />
-    <Content Include="sitecore modules\Web\SearchDemo\DateRangeDemoPage.aspx" />
     <Content Include="sitecore modules\Web\SearchDemo\TopNav.ascx" />
   </ItemGroup>
   <ItemGroup>

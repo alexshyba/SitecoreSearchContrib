@@ -1,11 +1,11 @@
-﻿namespace scSearchContrib.Searcher.Parameters
-{
-    using Lucene.Net.Search;
+﻿using System.Linq;
 
+namespace scSearchContrib.Searcher.Parameters
+{
     using Sitecore.Search;
 
     public interface ISearchParam
     {
-        Query ProcessQuery(QueryOccurance condition, Index index);
+        IQueryable<SkinnyItem> ProcessQuery(IQueryable<SkinnyItem> query, QueryOccurance condition, Index index);
     }
 }

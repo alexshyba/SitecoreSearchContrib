@@ -1,4 +1,6 @@
-﻿namespace scSearchContrib.Demo
+﻿using Sitecore.Search;
+
+namespace scSearchContrib.Demo
 {
   using System.Collections.Generic;
 

@@ -1,5 +1,6 @@
 ﻿namespace scSearchContrib.Crawler.FieldCrawlers
 {
+    using System;
     using System.Collections.Generic;
 
     using Sitecore.Collections;
@@ -36,7 +37,7 @@
 
                 if (!string.IsNullOrEmpty(fieldCrawlerType))
                 {
-                    var fieldCrawler = ReflectionUtil.CreateObject(fieldCrawlerType, new object[] { field });
+                    var fieldCrawler = GetFieldCrawlerByType(fieldCrawlerType, field);
 
                     if (fieldCrawler is IMultivaluedFieldCrawler)
                     {
@@ -51,6 +52,45 @@
             }
 
             return new[] { new DefaultFieldCrawler(field).GetValue() };
+        }
+
+        private static object GetFieldCrawlerByType(string fieldCrawlerType, Field field)
+        {
+            Func<Field, object> constructor;
+            // We could put in interlocks into the below code. However it is idempotent.
+            // Yes it will be non-optimal if multiple threads access the same type at the same time
+            // However afterwards, we will have better perf, when there is no locking.
+            // Plus its simplier :)
+            if (_compiledExpressions.TryGetValue(fieldCrawlerType, out constructor) == false)
+            {
+                _compiledExpressions[fieldCrawlerType] = constructor = ConstructorExpression(fieldCrawlerType);
+            }
+            return constructor(field);
+        }
+        
+        // Cache the IL for constructing FieldCrawlers
+        // Expression compile is expensive. But still SOOO much cheaper than reflection that it is replacing.
+        private readonly static Dictionary<string, Func<Field, object>> _compiledExpressions = new Dictionary<string, Func<Field, object>>();
+
+
+        // Create IL to run the constructor.
+        private static Func<Field, object> ConstructorExpression(string typeName)
+        {
+            var type = Type.GetType(typeName);
+            if (type == null)
+                return field => null;
+
+            var constructor = type.GetConstructor(new[] {typeof (Field)});
+
+            if (constructor == null)
+                return field => null;
+
+            var paramExpression = System.Linq.Expressions.Expression.Parameter(typeof (Field), "field");
+            var newExpression = System.Linq.Expressions.Expression.New(constructor, paramExpression);
+            var lambda = System.Linq.Expressions.Expression.Lambda<Func<Field, object>>(newExpression, paramExpression);
+
+            return lambda.Compile();
+
         }
     }
 }
